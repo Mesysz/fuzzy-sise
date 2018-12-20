@@ -1,2 +1,2 @@
 # fuzzy-sise
-# Authors: Antoni Messyasz, Bartlomiej szewczyk
+# Authors: Antoni Messyasz, Bartlomiej Szewczyk
