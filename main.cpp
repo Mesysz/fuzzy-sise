@@ -7,4 +7,5 @@
 int main()
 {
     std::cout<<"Authors: Antoni Messyasz, Barlomiej Szewczyk"<<std::endl;
+    std::cout<<"Hello World!"<<std::endl;
 }
