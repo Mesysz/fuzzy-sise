@@ -8,7 +8,7 @@
 #include "FuzzyDriver.h"
 
 class Road {
-    FuzzyDriver fuzzydriver;
+    FuzzyDriver fuzzyDriver;
     double speedA;
     double speedB;
     double speedC;

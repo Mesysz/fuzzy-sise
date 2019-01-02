@@ -135,7 +135,7 @@
         </WARTOSCI>
     </PARAMETR>
     <PARAMETR>
-        <NAZWA>Pas</NAZWA>
+        <NAZWA>Lane</NAZWA>
         <WARTOSCI>
             <NAZWA_WARTOSCI>1</NAZWA_WARTOSCI>
             <MIN_D>1</MIN_D>

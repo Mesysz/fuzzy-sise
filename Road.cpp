@@ -3,9 +3,10 @@
 //
 
 #include "Road.h"
-#include<unistd.h>
-#include<iostream>
-#include"FuzzyDriver.h"
+#include <unistd.h>
+#include <iostream>
+#include "FuzzyDriver.h"
+#include "functions.h"
 
 void Road::simulate() {
     bool notEnd = true;
@@ -13,9 +14,9 @@ void Road::simulate() {
 
     while (notEnd) {
         sleep(1);
-        fuzzydriver.calculateState(speedA, speedB, speedC, distanceAB, distanceAC, distanceToEnd, rightLane);
-        speedA += fuzzydriver.getAcceleration();
-        rightLane = fuzzydriver.getLane();
+        fuzzyDriver.calculateState(speedA, speedB, speedC, distanceAB, distanceAC, distanceToEnd, rightLane);
+        speedA += fuzzyDriver.getAcceleration();
+        rightLane = fuzzyDriver.getLane();
         distanceAB += speedB - speedA;
         distanceAC -= speedA + speedC;
         distanceToEnd -= speedA;
@@ -26,7 +27,8 @@ void Road::simulate() {
 
 Road::Road(double speedA, double speedB, double speedC, double distanceAB, double distanceAC, double distanceToEnd,
            bool rightLane) : speedA(speedA), speedB(speedB), speedC(speedC), distanceAB(distanceAB),
-                             distanceAC(distanceAC), distanceToEnd(distanceToEnd), rightLane(rightLane) {
+                             distanceAC(distanceAC), distanceToEnd(distanceToEnd), rightLane(rightLane),
+                             fuzzyDriver(0.0f, Lane::right) {
 
 }
 
