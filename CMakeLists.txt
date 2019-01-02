@@ -3,4 +3,4 @@ project (fuzzy-sise)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(fuzzy-sise main.cpp)
+add_executable(fuzzy-sise main.cpp Road.cpp Road.h functions.cpp functions.h FuzzyDriver.cpp FuzzyDriver.h)
