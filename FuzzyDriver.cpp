@@ -52,7 +52,17 @@ void FuzzyDriver::defuzzyficate() {
 void FuzzyDriver::readRegs(char *source) {
     tinyxml2::XMLDocument xmlDocument;
     xmlDocument.LoadFile(source);
-    const char *title = xmlDocument.FirstChildElement("STER")->FirstChildElement("PARAMETR")->FirstChildElement(
-            "NAZWA")->
-            std::cout << title << std::endl;
+    //const char *title = xmlDocument.FirstChildElement("STER")->FirstChildElement("PARAMETR")->FirstChildElement(
+            //"NAZWA")->GetText();
+    tinyxml2::XMLElement* element = xmlDocument.FirstChildElement("PARAMETERS")->FirstChildElement("SPEED")->FirstChildElement("PARAM");
+    for(int j = 0; j < 5; ++j){
+        tinyxml2::XMLElement* element1 = element->FirstChildElement("NAME");
+        std::cout << element1->GetText() << std::endl;
+        for(int i = 0; i < 4; ++i){
+            std::cout << element1->NextSiblingElement()->GetText() << std::endl;
+            element1 = element1->NextSiblingElement();
+        }
+        element = element->NextSiblingElement();
+    }
+    //std::cout << title << std::endl;
 }
