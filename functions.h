@@ -5,27 +5,19 @@
 #ifndef FUZZY_SISE_FUNCTIONS_H
 #define FUZZY_SISE_FUNCTIONS_H
 
+#include <iostream>
+
 enum Lane {
     right = false,
     left = true
 };
 
-enum Speed {
-    very_fast,
-    fast,
-    medium,
-    slow,
-    very_slow
-};
-enum Distance {
-    far,
-    normal,
-    near,
-    very_close,
-    very_close_behind,
-    near_behind,
-    normal_behind,
-    far_behind
+struct Parameters {
+    std::string name;
+    double A;
+    double M;
+    double N;
+    double B;
 };
 
 #endif //FUZZY_SISE_FUNCTIONS_H
