@@ -21,7 +21,7 @@ enum Distance {
     very_far,
     far,
     normal,
-    close,
+    near,
     very_close
 };
 

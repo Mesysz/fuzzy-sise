@@ -7,13 +7,15 @@
 #include <iostream>
 #include "FuzzyDriver.h"
 #include "functions.h"
+#include <chrono>
+#include <thread>
 
 void Road::simulate() {
     bool notEnd = true;
     int i = 0;
 
     while (notEnd) {
-        sleep(1);
+        std::this_thread::sleep_for(std::chrono::seconds(1));
         fuzzyDriver.calculateState(speedA, speedB, speedC, distanceAB, distanceAC, distanceToEnd, rightLane);
         speedA += fuzzyDriver.getAcceleration();
         rightLane = fuzzyDriver.getLane();
