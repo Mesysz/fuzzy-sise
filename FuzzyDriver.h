@@ -13,9 +13,6 @@ class FuzzyDriver {
 private:
     double acceleration;
     bool lane;
-    Speed fuzzyASpeed;
-    Speed fuzzyBSpeed;
-    Speed fuzzyCSpeed;
     //TODO: Ustaw mi tu jakas zmienna do mapy ;3
     std::vector<std::vector<int>> speed;
 
