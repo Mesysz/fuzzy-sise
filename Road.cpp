@@ -13,7 +13,7 @@
 void Road::simulate() {
     bool notEnd = true;
     int i = 0;
-
+    fuzzyDriver.readRegs("../ustaw.xml");
     while (notEnd) {
         std::this_thread::sleep_for(std::chrono::seconds(1));
         fuzzyDriver.calculateState(speedA, speedB, speedC, distanceAB, distanceAC, distanceToEnd, rightLane);
