@@ -6,6 +6,7 @@
 #define FUZZY_SISE_FUZZYDRIVER_H
 
 #include "functions.h"
+#include "tinyxml2-master/tinyxml2.h"
 #include <iostream>
 #include <vector>
 
@@ -14,7 +15,10 @@ private:
     double acceleration;
     bool lane;
     //TODO: Ustaw mi tu jakas zmienna do mapy ;3
-    std::vector<struct Parameters> speed;
+    std::vector<struct Parameters> speedVector;
+    std::vector<struct Parameters> distanceVector;
+    std::vector<struct Parameters> laneVector;
+    std::vector<struct Parameters> accelerationVector;
 
     void fuzzyficate(double speedA, double speedB, double speedC, double distanceAB, double distanceAC,
                      double distanceToEnd, bool rightLane);
@@ -35,6 +39,7 @@ public:
 
     void readRegs(char *source);
 
+    void readParam(std::string param, char *source, std::vector<struct Parameters> vector);
 };
 
 
