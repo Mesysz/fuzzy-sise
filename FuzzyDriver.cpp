@@ -57,11 +57,20 @@ void FuzzyDriver::readRegs(char *source) {
     tinyxml2::XMLElement* element = xmlDocument.FirstChildElement("PARAMETERS")->FirstChildElement("SPEED")->FirstChildElement("PARAM");
     for(int j = 0; j < 5; ++j){
         tinyxml2::XMLElement* element1 = element->FirstChildElement("NAME");
-        std::cout << element1->GetText() << std::endl;
-        for(int i = 0; i < 4; ++i){
-            std::cout << element1->NextSiblingElement()->GetText() << std::endl;
-            element1 = element1->NextSiblingElement();
-        }
+        Parameters parameters;
+        parameters.name = element1->GetText();
+        double temp = atof(element1->NextSiblingElement()->GetText());
+        parameters.A = temp;
+        element1 = element1->NextSiblingElement();
+        temp = atof(element1->NextSiblingElement()->GetText());
+        parameters.M = temp;
+        element1 = element1->NextSiblingElement();
+        temp = atof(element1->NextSiblingElement()->GetText());
+        parameters.N = temp;
+        element1 = element1->NextSiblingElement();
+        temp = atof(element1->NextSiblingElement()->GetText());
+        parameters.B = temp;
+        speed.push_back(parameters);
         element = element->NextSiblingElement();
     }
     //std::cout << title << std::endl;
