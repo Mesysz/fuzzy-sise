@@ -15,10 +15,10 @@ private:
     double acceleration;
     bool lane;
     //TODO: Ustaw mi tu jakas zmienna do mapy ;3
-    std::vector<struct Parameters> speedVector;
-    std::vector<struct Parameters> distanceVector;
-    std::vector<struct Parameters> laneVector;
-    std::vector<struct Parameters> accelerationVector;
+    std::vector<Parameters> speedVector;
+    std::vector<Parameters> distanceVector;
+    std::vector<Parameters> laneVector;
+    std::vector<Parameters> accelerationVector;
 
     void fuzzyficate(double speedA, double speedB, double speedC, double distanceAB, double distanceAC,
                      double distanceToEnd, bool rightLane);
@@ -39,7 +39,7 @@ public:
 
     void readRegs(char *source);
 
-    void readParam(std::string param, char *source, std::vector<struct Parameters> vector);
+    void readParam(std::string param, char *source, std::vector<Parameters> &vector);
 };
 
 

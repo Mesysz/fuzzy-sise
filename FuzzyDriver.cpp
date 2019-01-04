@@ -50,18 +50,19 @@ void FuzzyDriver::defuzzyficate() {
 }
 
 void FuzzyDriver::readRegs(char *source) {
-    readParam("SPEED", source, this->speedVector);
-    readParam("DISTANCE", source, this->distanceVector);
-    readParam("LANE", source, this->laneVector);
-    readParam("ACCELERATION", source, this->accelerationVector);
+    readParam("SPEED", source, speedVector);
+    readParam("DISTANCE", source, distanceVector);
+    readParam("LANE", source, laneVector);
+    readParam("ACCELERATION", source, accelerationVector);
 }
 
-void FuzzyDriver::readParam(std::string param, char *source, std::vector<struct Parameters> vector){
+void FuzzyDriver::readParam(std::string param, char *source, std::vector<Parameters> &vector){
     tinyxml2::XMLDocument xmlDocument;
     xmlDocument.LoadFile(source);
     tinyxml2::XMLElement* element = xmlDocument.FirstChildElement("PARAMETERS")->FirstChildElement(param.c_str())->FirstChildElement("PARAM");
-    for(int j = 0; j < 5; ++j){
-        tinyxml2::XMLElement* element1 = element->FirstChildElement("NAME");
+
+    for(tinyxml2::XMLElement* e = element; e != NULL; e = e->NextSiblingElement()){
+        tinyxml2::XMLElement* element1 = e->FirstChildElement("NAME");
         Parameters parameters;
         parameters.name = element1->GetText();
         double temp = atof(element1->NextSiblingElement()->GetText());
@@ -76,6 +77,5 @@ void FuzzyDriver::readParam(std::string param, char *source, std::vector<struct 
         temp = atof(element1->NextSiblingElement()->GetText());
         parameters.B = temp;
         vector.push_back(parameters);
-        element = element->NextSiblingElement();
     }
 }
