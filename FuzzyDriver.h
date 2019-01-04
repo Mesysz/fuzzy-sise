@@ -6,6 +6,7 @@
 #define FUZZY_SISE_FUZZYDRIVER_H
 
 #include "functions.h"
+#include <iostream>
 
 class FuzzyDriver {
 private:
