@@ -18,11 +18,14 @@ enum Speed {
     very_slow
 };
 enum Distance {
-    very_far,
     far,
     normal,
     near,
-    very_close
+    very_close,
+    very_close_behind,
+    near_behind,
+    normal_behind,
+    far_behind
 };
 
 #endif //FUZZY_SISE_FUNCTIONS_H

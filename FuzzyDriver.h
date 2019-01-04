@@ -28,9 +28,9 @@ public:
     void calculateState(double speedA, double speedB, double speedC, double distanceAB, double distanceAC,
                         double distanceToEnd, bool rightLane);
 
-    double getAcceleration();
+    double getAcceleration() const;
 
-    bool getLane();
+    bool getLane() const;
 
 };
 

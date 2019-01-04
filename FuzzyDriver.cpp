@@ -9,11 +9,11 @@ void FuzzyDriver::calculateState(double speedA, double speedB, double speedC, do
 
 }
 
-double FuzzyDriver::getAcceleration() {
+double FuzzyDriver::getAcceleration() const {
     return acceleration;
 }
 
-bool FuzzyDriver::getLane() {
+bool FuzzyDriver::getLane() const {
     return lane;
 }
 
