@@ -15,6 +15,7 @@ private:
     Speed fuzzyASpeed;
     Speed fuzzyBSpeed;
     Speed fuzzyCSpeed;
+    //TODO: Ustaw mi tu jakas zmienna do mapy ;3
 
     void fuzzyficate(double speedA, double speedB, double speedC, double distanceAB, double distanceAC,
                      double distanceToEnd, bool rightLane);
@@ -32,6 +33,8 @@ public:
     double getAcceleration() const;
 
     bool getLane() const;
+
+    void readRegs(char *source);
 
 };
 

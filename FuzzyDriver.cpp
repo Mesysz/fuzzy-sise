@@ -7,11 +7,7 @@
 
 void FuzzyDriver::calculateState(double speedA, double speedB, double speedC, double distanceAB, double distanceAC,
                                  double distanceToEnd, bool rightLane) {
-    tinyxml2::XMLDocument dupa;
-    dupa.LoadFile("../ustaw.xml");
-    const char *title = dupa.FirstChildElement("STER")->FirstChildElement("PARAMETR")->FirstChildElement(
-            "NAZWA")->GetText();
-    std::cout << title << std::endl;
+
 }
 
 double FuzzyDriver::getAcceleration() const {
@@ -51,4 +47,11 @@ void FuzzyDriver::decide() {
 
 void FuzzyDriver::defuzzyficate() {
 
+}
+
+void FuzzyDriver::readRegs(char *source) {
+    tinyxml2::XMLDocument xmlDocument;
+    xmlDocument.LoadFile(source);
+//    const char *title = xmlDocument.FirstChildElement("STER")->FirstChildElement("PARAMETR")->FirstChildElement(
+//            "NAZWA")->GetText();
 }
