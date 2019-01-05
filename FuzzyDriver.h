@@ -9,12 +9,13 @@
 #include "tinyxml2-master/tinyxml2.h"
 #include <iostream>
 #include <vector>
+#include <iomanip>
 
 class FuzzyDriver {
 private:
     double acceleration;
     bool lane;
-    //TODO: Ustaw mi tu jakas zmienna do mapy ;3
+
     std::vector<Parameters> speedVector;
     std::vector<Parameters> distanceVector;
     std::vector<Parameters> laneVector;
@@ -26,6 +27,8 @@ private:
     void decide();
 
     void defuzzyficate();
+
+    std::vector<std::pair<std::string, double>> get_membership(double value, std::vector<Parameters> params);
 
 public:
     FuzzyDriver(double acceleration, bool lane);

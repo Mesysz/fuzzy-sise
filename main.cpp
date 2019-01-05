@@ -11,7 +11,7 @@ int main()
     std::cout<<"Authors: Antoni Messyasz, Barlomiej Szewczyk"<<std::endl;
     std::cout << "Hello Road!" << std::endl;
     //speedA, speedB, speedC, distanceAB, distanceAC, distanceToEnd, rightLane
-    Road road(2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, true);
+    Road road(2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 1520.0f, true);
     double predkoscA;
     double predkoscB;
     double predkoscC;

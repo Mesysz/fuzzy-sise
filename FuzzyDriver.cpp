@@ -3,11 +3,10 @@
 //
 
 #include "FuzzyDriver.h"
-#include "tinyxml2-master/tinyxml2.h"
 
 void FuzzyDriver::calculateState(double speedA, double speedB, double speedC, double distanceAB, double distanceAC,
                                  double distanceToEnd, bool rightLane) {
-
+    fuzzyficate(speedA, speedB, speedC, distanceAB, distanceAC, distanceToEnd, rightLane);
 }
 
 double FuzzyDriver::getAcceleration() const {
@@ -22,23 +21,54 @@ FuzzyDriver::FuzzyDriver(double acceleration, bool lane) : acceleration(accelera
 
 }
 
+std::vector<std::pair<std::string, double>> FuzzyDriver::get_membership(double value, std::vector<Parameters> params) {
+    std::vector<std::pair<std::string, double>> membership;
+    for (auto i : params) {
+        double result =
+                value < i.A ? 0 : value < i.M ? (value - i.A) / (i.M - i.A) : value < i.N ? 1 : value < i.B ?
+                                                                                                (i.B - value) /
+                                                                                                (i.B - i.N) : 0;
+        membership.emplace_back(std::make_pair(i.name, result));
+    }
+    return membership;
+}
+
 void FuzzyDriver::fuzzyficate(double speedA, double speedB, double speedC, double distanceAB, double distanceAC,
                               double distanceToEnd, bool rightLane) {
-//    if(speedA<=25 && speedA>20) fuzzyASpeed = Speed::very_fast;
-//    if(speedA<=20 && speedA>15) fuzzyASpeed = Speed::fast;
-//    if(speedA<=15 && speedA>10) fuzzyASpeed = Speed::medium;
-//    if(speedA<=10 && speedA>5)  fuzzyASpeed = Speed::slow;
-//    if(speedA<=5  && speedA>=0) fuzzyASpeed = Speed::very_slow;
-//    if(speedB<=25 && speedB>20) fuzzyBSpeed = Speed::very_fast;
-//    if(speedB<=20 && speedB>15) fuzzyBSpeed = Speed::fast;
-//    if(speedB<=15 && speedB>10) fuzzyBSpeed = Speed::medium;
-//    if(speedB<=10 && speedB>5)  fuzzyBSpeed = Speed::slow;
-//    if(speedB<=5  && speedB>=0) fuzzyBSpeed = Speed::very_slow;
-//    if(speedC<=25 && speedC>20) fuzzyCSpeed = Speed::very_fast;
-//    if(speedC<=20 && speedC>15) fuzzyCSpeed = Speed::fast;
-//    if(speedC<=15 && speedC>10) fuzzyCSpeed = Speed::medium;
-//    if(speedC<=10 && speedC>5)  fuzzyCSpeed = Speed::slow;
-//    if(speedC<=5  && speedC>=0) fuzzyCSpeed = Speed::very_slow;
+    auto t1 = get_membership(speedA, speedVector);
+    auto t2 = get_membership(speedB, speedVector);
+    auto t3 = get_membership(speedC, speedVector);
+    auto t4 = get_membership(distanceAB, distanceVector);
+    auto t5 = get_membership(distanceAC, distanceVector);
+    auto t6 = get_membership(distanceToEnd, distanceVector);
+
+//    DEBUGOWANIE BARDZO XD
+//
+    std::cout << "speedA:        ";
+    for (auto i : t1) {
+        if (i.second > 0) std::cout << i.first << " " << i.second << " ";
+    }
+    std::cout << std::endl << "speedB:        ";
+    for (auto i : t2) {
+        if (i.second > 0) std::cout << i.first << " " << i.second << " ";
+    }
+    std::cout << std::endl << "speedC:        ";
+    for (auto i : t3) {
+        if (i.second > 0) std::cout << i.first << " " << i.second << " ";
+    }
+    std::cout << std::endl << "distanceAB:    ";
+    for (auto i : t4) {
+        if (i.second > 0) std::cout << i.first << " " << i.second << " ";
+    }
+    std::cout << std::endl << "distanceAC:    ";
+    for (auto i : t5) {
+        if (i.second > 0) std::cout << i.first << " " << i.second << " ";
+    }
+    std::cout << std::endl << "distanceToEnd: ";
+    for (auto i : t6) {
+        if (i.second > 0) std::cout << i.first << " " << i.second << " ";
+    }
+    std::cout << std::endl;
 }
 
 void FuzzyDriver::decide() {
@@ -53,7 +83,7 @@ void FuzzyDriver::readRegs(char *source) {
     readParam("SPEED", source, speedVector);
     readParam("DISTANCE", source, distanceVector);
     readParam("LANE", source, laneVector);
-    readParam("ACCELERATION", source, accelerationVector);
+    //readParam("ACCELERATION", source, accelerationVector);
 }
 
 void FuzzyDriver::readParam(std::string param, char *source, std::vector<Parameters> &vector){
@@ -61,7 +91,7 @@ void FuzzyDriver::readParam(std::string param, char *source, std::vector<Paramet
     xmlDocument.LoadFile(source);
     tinyxml2::XMLElement* element = xmlDocument.FirstChildElement("PARAMETERS")->FirstChildElement(param.c_str())->FirstChildElement("PARAM");
 
-    for(tinyxml2::XMLElement* e = element; e != NULL; e = e->NextSiblingElement()){
+    for (tinyxml2::XMLElement *e = element; e != nullptr; e = e->NextSiblingElement()) {
         tinyxml2::XMLElement* element1 = e->FirstChildElement("NAME");
         Parameters parameters;
         parameters.name = element1->GetText();
