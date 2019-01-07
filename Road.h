@@ -6,6 +6,12 @@
 #define FUZZY_SISE_WORLD_H
 
 #include "FuzzyDriver.h"
+#include <unistd.h>
+#include <iostream>
+#include "FuzzyDriver.h"
+#include "functions.h"
+#include <chrono>
+#include <thread>
 
 class Road {
     FuzzyDriver fuzzyDriver;

@@ -79,14 +79,14 @@ void FuzzyDriver::defuzzyficate() {
 
 }
 
-void FuzzyDriver::readRegs(char *source) {
+void FuzzyDriver::readRegs(const char *source) {
     readParam("SPEED", source, speedVector);
     readParam("DISTANCE", source, distanceVector);
     readParam("LANE", source, laneVector);
     //readParam("ACCELERATION", source, accelerationVector);
 }
 
-void FuzzyDriver::readParam(std::string param, char *source, std::vector<Parameters> &vector){
+void FuzzyDriver::readParam(std::string param, const char *source, std::vector<Parameters> &vector) {
     tinyxml2::XMLDocument xmlDocument;
     xmlDocument.LoadFile(source);
     tinyxml2::XMLElement* element = xmlDocument.FirstChildElement("PARAMETERS")->FirstChildElement(param.c_str())->FirstChildElement("PARAM");

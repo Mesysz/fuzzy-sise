@@ -3,17 +3,12 @@
 //
 
 #include "Road.h"
-#include <unistd.h>
-#include <iostream>
-#include "FuzzyDriver.h"
-#include "functions.h"
-#include <chrono>
-#include <thread>
 
 void Road::simulate() {
     bool notEnd = true;
     int i = 0;
-    fuzzyDriver.readRegs("../ustaw.xml");
+    std::string source = "../ustaw.xml";
+    fuzzyDriver.readRegs(source.c_str());
     while (notEnd) {
         std::this_thread::sleep_for(std::chrono::seconds(1));
         fuzzyDriver.calculateState(speedA, speedB, speedC, distanceAB, distanceAC, distanceToEnd, rightLane);

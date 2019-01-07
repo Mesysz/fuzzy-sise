@@ -40,9 +40,9 @@ public:
 
     bool getLane() const;
 
-    void readRegs(char *source);
+    void readRegs(const char *source);
 
-    void readParam(std::string param, char *source, std::vector<Parameters> &vector);
+    void readParam(std::string param, const char *source, std::vector<Parameters> &vector);
 };
 
 
