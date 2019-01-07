@@ -3,13 +3,24 @@
 //
 
 #include "Road.h"
-
+#include <SFML/Graphics.hpp>
 void Road::simulate() {
     bool notEnd = true;
     int i = 0;
     std::string source = "../ustaw.xml";
     fuzzyDriver.readRegs(source.c_str());
+    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML Works!");
+    sf::CircleShape shape(100.f);
+    shape.setFillColor(sf::Color::Green);
     while (notEnd) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+        window.clear();
+        window.draw(shape);
+        window.display();
         std::this_thread::sleep_for(std::chrono::seconds(1));
         fuzzyDriver.calculateState(speedA, speedB, speedC, distanceAB, distanceAC, distanceToEnd, rightLane);
         speedA += fuzzyDriver.getAcceleration();
