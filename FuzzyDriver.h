@@ -10,6 +10,7 @@
 #include <iostream>
 #include <vector>
 #include <iomanip>
+#include "map"
 
 class FuzzyDriver {
 private:
@@ -20,6 +21,7 @@ private:
     std::vector<Parameters> distanceVector;
     std::vector<Parameters> laneVector;
     std::vector<Parameters> accelerationVector;
+    std::map<std::vector<std::pair<std::string, std::string>>, std::vector<std::pair<std::string, std::string>>> rulesMap;
 
     void fuzzyficate(double speedA, double speedB, double speedC, double distanceAB, double distanceAC,
                      double distanceToEnd, bool rightLane);
@@ -43,6 +45,8 @@ public:
     void readRegs(const char *source);
 
     void readParam(std::string param, const char *source, std::vector<Parameters> &vector);
+
+    void readRules(std::string param, const char *source);
 };
 
 

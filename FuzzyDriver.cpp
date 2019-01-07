@@ -6,7 +6,7 @@
 
 void FuzzyDriver::calculateState(double speedA, double speedB, double speedC, double distanceAB, double distanceAC,
                                  double distanceToEnd, bool rightLane) {
-    fuzzyficate(speedA, speedB, speedC, distanceAB, distanceAC, distanceToEnd, rightLane);
+    //fuzzyficate(speedA, speedB, speedC, distanceAB, distanceAC, distanceToEnd, rightLane);
 }
 
 double FuzzyDriver::getAcceleration() const {
@@ -84,6 +84,7 @@ void FuzzyDriver::readRegs(const char *source) {
     readParam("DISTANCE", source, distanceVector);
     readParam("LANE", source, laneVector);
     //readParam("ACCELERATION", source, accelerationVector);
+    readRules("COS", "../reg.xml");
 }
 
 void FuzzyDriver::readParam(std::string param, const char *source, std::vector<Parameters> &vector) {
@@ -107,5 +108,25 @@ void FuzzyDriver::readParam(std::string param, const char *source, std::vector<P
         temp = atof(element1->NextSiblingElement()->GetText());
         parameters.B = temp;
         vector.push_back(parameters);
+    }
+}
+
+void FuzzyDriver::readRules(std::string param, const char *source) {
+    tinyxml2::XMLDocument xmlDocument;
+    xmlDocument.LoadFile(source);
+    tinyxml2::XMLElement* element = xmlDocument.FirstChildElement("BASE")->FirstChildElement("RULE");
+    for(tinyxml2::XMLElement *e = element; e != nullptr; e = e->NextSiblingElement()){
+        std::vector<std::pair<std::string, std::string>> vectorKey;
+        std::vector<std::pair<std::string, std::string>> vectorValue;
+        tinyxml2::XMLElement* element1 = e->FirstChildElement("IF");
+        for(tinyxml2::XMLElement* e2 = element1->FirstChildElement(); e2 != nullptr; e2 = e2->NextSiblingElement()){
+            std::pair <std::string, std::string> pairKey (e2->Value(), e2->GetText());
+            vectorKey.emplace_back(pairKey);
+        }
+        element1 = e->FirstChildElement("THEN");
+        for(tinyxml2::XMLElement* e3  = element1->FirstChildElement(); e3 != nullptr; e3 = e3->NextSiblingElement()){
+            std::pair <std::string, std::string> pairValue (e3->Value(), e3->GetText());
+        }
+        rulesMap[vectorKey] = vectorValue;
     }
 }

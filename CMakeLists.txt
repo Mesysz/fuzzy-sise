@@ -6,7 +6,7 @@ if (UNIX)
     set(SFML_DIR "/usr/lib/cmake/SFML")
 endif (UNIX)
 if (WIN32)
-    set(SFML_DIR "tutaj")
+    set(SFML_DIR "C:/Users/bartek2/Desktop/sfml/SFML-2.5.1/lib/cmake/SFML")
 endif (WIN32)
 
 find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
