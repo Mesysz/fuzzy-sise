@@ -22,8 +22,15 @@ private:
     std::vector<Parameters> laneVector;
     std::vector<Parameters> accelerationVector;
     std::map<std::vector<std::pair<std::string, std::string>>, std::vector<std::pair<std::string, std::string>>> rulesMap;
+    std::vector<std::pair<std::string, double>> t1;
+    std::vector<std::pair<std::string, double>> t2;
+    std::vector<std::pair<std::string, double>> t3;
+    std::vector<std::pair<std::string, double>> t4;
+    std::vector<std::pair<std::string, double>> t5;
+    std::vector<std::pair<std::string, double>> t6;
+    std::map<std::string, std::vector<std::pair<std::string, double>>> tMap;
 
-    void fuzzyficate(double speedA, double speedB, double speedC, double distanceAB, double distanceAC,
+            void fuzzyficate(double speedA, double speedB, double speedC, double distanceAB, double distanceAC,
                      double distanceToEnd, bool rightLane);
 
     void decide();
@@ -47,6 +54,8 @@ public:
     void readParam(std::string param, const char *source, std::vector<Parameters> &vector);
 
     void readRules(std::string param, const char *source);
+
+    void check();
 };
 
 

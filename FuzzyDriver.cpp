@@ -7,6 +7,7 @@
 void FuzzyDriver::calculateState(double speedA, double speedB, double speedC, double distanceAB, double distanceAC,
                                  double distanceToEnd, bool rightLane) {
     fuzzyficate(speedA, speedB, speedC, distanceAB, distanceAC, distanceToEnd, rightLane);
+    check();
 }
 
 double FuzzyDriver::getAcceleration() const {
@@ -35,12 +36,17 @@ std::vector<std::pair<std::string, double>> FuzzyDriver::get_membership(double v
 
 void FuzzyDriver::fuzzyficate(double speedA, double speedB, double speedC, double distanceAB, double distanceAC,
                               double distanceToEnd, bool rightLane) {
-    auto t1 = get_membership(speedA, speedVector);
-    auto t2 = get_membership(speedB, speedVector);
-    auto t3 = get_membership(speedC, speedVector);
-    auto t4 = get_membership(distanceAB, distanceVector);
-    auto t5 = get_membership(distanceAC, distanceVector);
-    auto t6 = get_membership(distanceToEnd, distanceVector);
+    t1 = get_membership(speedA, speedVector);
+    t2 = get_membership(speedB, speedVector);
+    t3 = get_membership(speedC, speedVector);
+    t4 = get_membership(distanceAB, distanceVector);
+    t5 = get_membership(distanceAC, distanceVector);
+    t6 = get_membership(distanceToEnd, distanceVector);
+    tMap["SPEED_A"] = t1;
+    tMap["SPEED_B"] = t2;
+    tMap["SPEED_C"] = t3;
+    tMap["DISTANCE_AB"] = t4;
+    tMap["DISTANCE_AC"] = t5;
 
 //    DEBUGOWANIE BARDZO XD
 //
@@ -129,4 +135,42 @@ void FuzzyDriver::readRules(std::string param, const char *source) {
         }
         rulesMap[vectorKey] = vectorValue;
     }
+}
+
+void FuzzyDriver::check() {
+    std::map<std::vector<std::pair<std::string, std::string>>, std::vector<std::pair<std::string, std::string>>>::iterator it;
+    it = rulesMap.begin();
+    double cnt {0};
+    double sum {0};
+    std::vector<std::pair<std::string, double>> acc = get_membership(1, accelerationVector);
+    for(int i = 0; i < acc.size(); ++i){
+        acc[i].second = 1;
+    }
+    for(; it != rulesMap.end(); ++it){
+        double licznik {1};
+        for(int i = 0; i < it->first.size(); ++i){
+            std::string temp1 = it->first[i].first;
+            std::string temp2 = it->first[i].second;
+            for(int j = 0; j < tMap[temp1].size(); ++j){
+                if(tMap[temp1].at(j).first == temp2 && tMap[temp1].at(j).second > 0){
+                    licznik *= tMap[temp1].at(j).second;
+                    //rób coś
+                }
+            }
+        }
+        if(licznik != 1){
+            ++cnt;
+            sum += licznik;
+        }
+//        std::cout << "Licznk : " << licznik << std::endl;
+    }
+    double result {0};
+    if(cnt!=0){
+        result = sum/cnt;
+    }
+    std::cout << "wynik " << sum <<std::endl;
+    std::cout << "wynik " << cnt <<std::endl;
+    std::cout << "wynik " << result <<std::endl;
+
+
 }
