@@ -85,17 +85,17 @@
     <ACCELERATION>
         <PARAM>
             <NAME>high</NAME>
-            <A></A>
-            <M></M>
-            <N></N>
-            <B></B>
+            <A>0.3</A>
+            <M>1.0</M>
+            <N>1.3</N>
+            <B>1.3</B>
         </PARAM>
         <PARAM>
             <NAME>small</NAME>
-            <A></A>
-            <M></M>
-            <N></N>
-            <B></B>
+            <A>0.0</A>
+            <M>0.1</M>
+            <N>0.3</N>
+            <B>1.0</B>
         </PARAM>
         <PARAM>
             <NAME>zero</NAME>
@@ -106,24 +106,24 @@
         </PARAM>
         <PARAM>
             <NAME>small_break</NAME>
-            <A></A>
-            <M></M>
-            <N></N>
-            <B></B>
+            <A>0.0</A>
+            <M>0.1</M>
+            <N>2.5</N>
+            <B>3.5</B>
         </PARAM>
         <PARAM>
             <NAME>medium_break</NAME>
-            <A></A>
-            <M></M>
-            <N></N>
-            <B></B>
+            <A>2.5</A>
+            <M>3.5</M>
+            <N>5.5</N>
+            <B>6.5</B>
         </PARAM>
         <PARAM>
             <NAME>high_break</NAME>
-            <A></A>
-            <M></M>
-            <N></N>
-            <B></B>
+            <A>5.5</A>
+            <M>6.5</M>
+            <N>9.0</N>
+            <B>9.0</B>
         </PARAM>
     </ACCELERATION>
 </PARAMETERS>

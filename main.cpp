@@ -5,19 +5,22 @@
 #include <iostream>
 #include "Road.h"
 #include "functions.h"
+#include <random>
 
 int main()
 {
     std::cout<<"Authors: Antoni Messyasz, Barlomiej Szewczyk"<<std::endl;
     std::cout << "Hello Road!" << std::endl;
+    std::uniform_real_distribution<double> random_speed(6.0, 25.0);
+    std::uniform_real_distribution<double> random_distance(2.0, 2000.0);
+    std::default_random_engine re;
+    double speedA = random_speed(re);
+    double speedB = random_speed(re);
+    double speedC = random_speed(re);
+    double distanceAB = random_distance(re);
+    double distanceAC = random_distance(re);
+    double distanceToEnd = 2000.0;
     //speedA, speedB, speedC, distanceAB, distanceAC, distanceToEnd, rightLane
-    Road road(20.0f, 25.0f, 18.0f, 1000.0f, 1500.0f, 2000.0f, true);
-    double predkoscA;
-    double predkoscB;
-    double predkoscC;
-    double distanceAB;
-    double distanceAC;
-    double distanceToEnd;
-    bool przeciwnyPas;
+    Road road(speedA, speedB, speedC, distanceAB, distanceAC, distanceToEnd, true);
     road.simulate();
 }
