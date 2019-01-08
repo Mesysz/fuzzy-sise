@@ -89,7 +89,7 @@ void FuzzyDriver::readRegs(const char *source) {
     readParam("SPEED", source, speedVector);
     readParam("DISTANCE", source, distanceVector);
     readParam("LANE", source, laneVector);
-    //readParam("ACCELERATION", source, accelerationVector);
+    readParam("ACCELERATION", source, accelerationVector);
     readRules("COS", "../reg.xml");
 }
 
@@ -146,6 +146,15 @@ void FuzzyDriver::check() {
     for(int i = 0; i < acc.size(); ++i){
         acc[i].second = 1;
     }
+    double accMin {0};
+    double accMax {0};
+
+    std::vector<std::pair<std::string, double>> v;
+
+    for(int i = 0; i < accelerationVector.size(); ++i){
+        std::pair<std::string, double> tempPair(accelerationVector[i].name, accelerationVector[i].B - accelerationVector[i].A);
+        v.emplace_back(tempPair);
+    }
     for(; it != rulesMap.end(); ++it){
         double licznik {1};
         for(int i = 0; i < it->first.size(); ++i){
@@ -153,11 +162,21 @@ void FuzzyDriver::check() {
             std::string temp2 = it->first[i].second;
             for(int j = 0; j < tMap[temp1].size(); ++j){
                 if(tMap[temp1].at(j).first == temp2 && tMap[temp1].at(j).second > 0){
-                    licznik *= tMap[temp1].at(j).second;
+                    for(int k = 0; k < acc.size(); ++k){
+                        if(acc[k].first == temp2){
+                            acc[k].second *= tMap[temp1].at(j).second;
+                        }
+                    }
+//                    licznik *= tMap[temp1].at(j).second;
                     //rób coś
                 }
             }
         }
+        for(int i = 0; i < v.size(); ++i){
+            v[i].second = v[i].second*acc[i].second - accelerationVector[i].A;
+            std::cout << "DUPA " << v[i].second << std::endl;
+        }
+
         if(licznik != 1){
             ++cnt;
             sum += licznik;
