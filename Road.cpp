@@ -9,7 +9,8 @@ void Road::simulate() {
     int i = 0;
     std::string source = "../ustaw.xml";
     fuzzyDriver.readRegs(source.c_str());
-    sf::RenderWindow window(sf::VideoMode(200, 1000), "SFML Works!");
+    sf::RenderWindow window(sf::VideoMode(200, 500), "SFML Works!");
+    float divider = 2000 / window.getSize().y;
     sf::CircleShape carA(5.f);
     sf::CircleShape carB(5.f);
     sf::CircleShape carC(5.f);
@@ -32,9 +33,9 @@ void Road::simulate() {
         distanceAC -= speedA + speedC;
         distanceToEnd -= speedA;
         window.clear();
-        carA.setPosition(150, distanceToEnd / 2);
-        carB.setPosition(150, distanceToEnd / 2 - distanceAB / 2);
-        carC.setPosition(100, distanceToEnd / 2 - distanceAC / 2);
+        carA.setPosition(150, distanceToEnd / divider);
+        carB.setPosition(150, distanceToEnd / divider - distanceAB / divider);
+        carC.setPosition(100, distanceToEnd / divider - distanceAC / divider);
         window.draw(carA);
         window.draw(carB);
         window.draw(carC);
