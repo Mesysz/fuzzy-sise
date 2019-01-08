@@ -12,9 +12,12 @@ void Road::simulate() {
     sf::RenderWindow window(sf::VideoMode(200, 1000), "SFML Works!");
     sf::CircleShape carA(5.f);
     sf::CircleShape carB(5.f);
+    sf::CircleShape carC(5.f);
     carA.setFillColor(sf::Color::Green);
     carB.setFillColor(sf::Color::Red);
+    carC.setFillColor(sf::Color::Yellow);
     while (notEnd) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
@@ -22,7 +25,6 @@ void Road::simulate() {
                 notEnd = false;
             }
         }
-        std::this_thread::sleep_for(std::chrono::seconds(1));
         fuzzyDriver.calculateState(speedA, speedB, speedC, distanceAB, distanceAC, distanceToEnd, rightLane);
         speedA += fuzzyDriver.getAcceleration();
         rightLane = fuzzyDriver.getLane();
@@ -32,8 +34,10 @@ void Road::simulate() {
         window.clear();
         carA.setPosition(150, distanceToEnd / 2);
         carB.setPosition(150, distanceToEnd / 2 - distanceAB / 2);
+        carC.setPosition(100, distanceToEnd / 2 - distanceAC / 2);
         window.draw(carA);
         window.draw(carB);
+        window.draw(carC);
         std::cout << speedA << " " << speedB << " " << speedC << " " << distanceAB << " " << distanceAC << " "
                   << distanceToEnd << " " << rightLane << std::endl;
         window.display();

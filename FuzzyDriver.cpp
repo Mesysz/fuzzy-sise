@@ -6,7 +6,7 @@
 
 void FuzzyDriver::calculateState(double speedA, double speedB, double speedC, double distanceAB, double distanceAC,
                                  double distanceToEnd, bool rightLane) {
-    //fuzzyficate(speedA, speedB, speedC, distanceAB, distanceAC, distanceToEnd, rightLane);
+    fuzzyficate(speedA, speedB, speedC, distanceAB, distanceAC, distanceToEnd, rightLane);
 }
 
 double FuzzyDriver::getAcceleration() const {
@@ -25,7 +25,7 @@ std::vector<std::pair<std::string, double>> FuzzyDriver::get_membership(double v
     std::vector<std::pair<std::string, double>> membership;
     for (auto i : params) {
         double result =
-                value < i.A ? 0 : value < i.M ? (value - i.A) / (i.M - i.A) : value < i.N ? 1 : value < i.B ?
+                value < i.A ? 0 : value < i.M ? (value - i.A) / (i.M - i.A) : value <= i.N ? 1 : value < i.B ?
                                                                                                 (i.B - value) /
                                                                                                 (i.B - i.N) : 0;
         membership.emplace_back(std::make_pair(i.name, result));
@@ -50,7 +50,7 @@ void FuzzyDriver::fuzzyficate(double speedA, double speedB, double speedC, doubl
     }
     std::cout << std::endl << "speedB:        ";
     for (auto i : t2) {
-        if (i.second > 0) std::cout << i.first << " " << i.second << " ";
+        std::cout << i.first << " " << i.second << " ";
     }
     std::cout << std::endl << "speedC:        ";
     for (auto i : t3) {
