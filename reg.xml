@@ -2,42 +2,33 @@
         <RULE>
             <IF>
                 <SPEED_A>fast</SPEED_A>
-                0.5
                 <DISTANCE_AB>far</DISTANCE_AB>
-                0.8
                 <LANE>right</LANE>
             </IF>
             <THEN>
                 <ACCELERATION>high</ACCELERATION>
-                0.4
                 <LANE>right</LANE>
             </THEN>
         </RULE>
         <RULE>
             <IF>
                 <SPEED_A>medium</SPEED_A>
-                0.8
                 <DISTANCE_AB>far</DISTANCE_AB>
-                0.8
                 <LANE>right</LANE>
             </IF>
             <THEN>
                 <ACCELERATION>high</ACCELERATION>
-                0.64
                 <LANE>right</LANE>
             </THEN>
         </RULE>
         <RULE>
             <IF>
                 <SPEED_A>slow</SPEED_A>
-                0.0
                 <DISTANCE_AB>far</DISTANCE_AB>
-                0.8
                 <LANE>right</LANE>
             </IF>
             <THEN>
                 <ACCELERATION>high</ACCELERATION>
-                0.0
                 <LANE>right</LANE>
             </THEN>
         </RULE>
