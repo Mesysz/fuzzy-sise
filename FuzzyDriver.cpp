@@ -42,6 +42,12 @@ void FuzzyDriver::fuzzyficate(double speedA, double speedB, double speedC, doubl
     t4 = get_membership(distanceAB, distanceVector);
     t5 = get_membership(distanceAC, distanceVector);
     t6 = get_membership(distanceToEnd, distanceVector);
+    if(rightLane){
+        lane2 = "right";
+    }
+    else{
+        lane2 = "left";
+    }
     tMap["SPEED_A"] = t1;
     tMap["SPEED_B"] = t2;
     tMap["SPEED_C"] = t3;
@@ -91,6 +97,7 @@ void FuzzyDriver::readRegs(const char *source) {
     readParam("LANE", source, laneVector);
     readParam("ACCELERATION", source, accelerationVector);
     readRules("COS", "../reg.xml");
+    calculateCenterValues();
 }
 
 void FuzzyDriver::readParam(std::string param, const char *source, std::vector<Parameters> &vector) {
@@ -132,6 +139,7 @@ void FuzzyDriver::readRules(std::string param, const char *source) {
         element1 = e->FirstChildElement("THEN");
         for(tinyxml2::XMLElement* e3  = element1->FirstChildElement(); e3 != nullptr; e3 = e3->NextSiblingElement()){
             std::pair <std::string, std::string> pairValue (e3->Value(), e3->GetText());
+            vectorValue.emplace_back(pairValue);
         }
         rulesMap[vectorKey] = vectorValue;
     }
@@ -140,56 +148,51 @@ void FuzzyDriver::readRules(std::string param, const char *source) {
 void FuzzyDriver::check() {
     std::map<std::vector<std::pair<std::string, std::string>>, std::vector<std::pair<std::string, std::string>>>::iterator it;
     it = rulesMap.begin();
-    double cnt {0};
-    double sum {0};
-    std::vector<std::pair<std::string, double>> acc = get_membership(1, accelerationVector);
-    for(int i = 0; i < acc.size(); ++i){
-        acc[i].second = 1;
-    }
-    double accMin {0};
-    double accMax {0};
-
     std::vector<std::pair<std::string, double>> v;
-
-    for(int i = 0; i < accelerationVector.size(); ++i){
-        std::pair<std::string, double> tempPair(accelerationVector[i].name, accelerationVector[i].B - accelerationVector[i].A);
-        v.emplace_back(tempPair);
-    }
     for(; it != rulesMap.end(); ++it){
-        double licznik {1};
+        int conditions {0};
+        double coefficient {2};
         for(int i = 0; i < it->first.size(); ++i){
             std::string temp1 = it->first[i].first;
             std::string temp2 = it->first[i].second;
             for(int j = 0; j < tMap[temp1].size(); ++j){
-                if(tMap[temp1].at(j).first == temp2 && tMap[temp1].at(j).second > 0){
-                    for(int k = 0; k < acc.size(); ++k){
-                        if(acc[k].first == temp2){
-                            acc[k].second *= tMap[temp1].at(j).second;
-                        }
+                if(tMap[temp1].at(j).first == temp2 && tMap[temp1].at(j).second > 0){//do tego ifa wejdzie jeśli pojedynczy warunek z reguly jest spelniony
+                    ++conditions;// licze warunki, zeby potem sprawdzic czy wszystkie zostaly spelnione z reguly
+                    if(tMap[temp1].at(j).second < coefficient){// szukam minimum
+                        coefficient = tMap[temp1].at(j).second;
                     }
-//                    licznik *= tMap[temp1].at(j).second;
-                    //rób coś
                 }
             }
         }
-        for(int i = 0; i < v.size(); ++i){
-            v[i].second = v[i].second*acc[i].second - accelerationVector[i].A;
-            std::cout << "DUPA " << v[i].second << std::endl;
+        if(it->first.back().second == lane2){//sprawdzam warunek na tor jazdy
+            ++conditions;
         }
-
-        if(licznik != 1){
-            ++cnt;
-            sum += licznik;
+        if(coefficient != 2 && conditions == it->first.size()){//jesli wszystkie warunki spelnione to dodaje do wektora rodzaj przyspieszenia i wartosc minimum
+            std::pair<std::string, double> pairNewAcc (it->second.at(0).second, coefficient);
+            v.emplace_back(pairNewAcc);
         }
-//        std::cout << "Licznk : " << licznik << std::endl;
     }
-    double result {0};
-    if(cnt!=0){
-        result = sum/cnt;
+    double weightSum {0};
+    double sum {0};
+    double newAcc {0};
+    std::map<std::string, double>::iterator iteratorCenterValuesAcc = centerValuesAcc.begin();
+    for(int i = 0; i < v.size(); ++i){
+        for(; iteratorCenterValuesAcc != centerValuesAcc.end(); ++iteratorCenterValuesAcc){
+            if(v[i].first == iteratorCenterValuesAcc->first){//sprawdzam czy rodzaj predkosci sie zgadza
+                weightSum += v[i].second;//sumuje wagi do mianownika
+                sum += v[i].second * iteratorCenterValuesAcc->second; // mnoze przez srodkowa wartosc do licznika
+            }
+        }
     }
-    std::cout << "wynik " << sum <<std::endl;
-    std::cout << "wynik " << cnt <<std::endl;
-    std::cout << "wynik " << result <<std::endl;
-
-
+    newAcc = sum/weightSum;//srednia wazona
+    std::cout << "Nowe przyspieszenie wynosi: " << newAcc << std::endl;//tutaj powinna byc i chyba jest nowa wartosc przyspieszenia
+    // trzeba te wartosc przekazac do samochodu, nie wiem czemu ale w drugiej iteracji sie nie liczy :( blad jest chybaa w tym, ze nie zalicza reguly chuj wie czemu
 }
+
+void FuzzyDriver::calculateCenterValues() {
+    for(int i = 0; i < accelerationVector.size(); ++i){
+        centerValuesAcc[accelerationVector[i].name] = (accelerationVector[i].M + accelerationVector[i].N)/2;
+    }
+}
+
+
