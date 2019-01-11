@@ -42,7 +42,7 @@ void FuzzyDriver::fuzzyficate(double speedA, double speedB, double speedC, doubl
     t4 = get_membership(distanceAB, distanceVector);
     t5 = get_membership(distanceAC, distanceVector);
     t6 = get_membership(distanceToEnd, distanceVector);
-    if(rightLane){
+    if(!rightLane){
         lane2 = "right";
     }
     else{
@@ -149,6 +149,7 @@ void FuzzyDriver::check() {
     std::map<std::vector<std::pair<std::string, std::string>>, std::vector<std::pair<std::string, std::string>>>::iterator it;
     it = rulesMap.begin();
     std::vector<std::pair<std::string, double>> v;
+    std::string newLane = "right";
     for(; it != rulesMap.end(); ++it){
         int conditions {0};
         double coefficient {2};
@@ -170,12 +171,30 @@ void FuzzyDriver::check() {
         if(coefficient != 2 && conditions == it->first.size()){//jesli wszystkie warunki spelnione to dodaje do wektora rodzaj przyspieszenia i wartosc minimum
             std::pair<std::string, double> pairNewAcc (it->second.at(0).second, coefficient);
             v.emplace_back(pairNewAcc);
+            if(lane2 == "right" && it->second.back().second == "left"){
+                newLane = "left";
+            }
+            if(lane2 == "left" && it->second.back().second == "right"){
+                newLane = "right";
+            }
+            std::cout << "Nowa linia: " << it->second.back().second << std::endl;
         }
     }
+    if(newLane == "right"){
+        lane = 0;
+    }
+    else{
+        lane = 1;
+    }
+    std::cout <<  std::endl;
+    std::cout <<  std::endl;
+    std::cout <<  std::endl;
+    std::cout <<  std::endl;
     double weightSum {0};
     double sum {0};
     double newAcc {0};
     std::map<std::string, double>::iterator iteratorCenterValuesAcc = centerValuesAcc.begin();
+    std::cout << "Ilosc dobrych regul to : " << v.size() << std::endl;
     for(int i = 0; i < v.size(); ++i){
         for(; iteratorCenterValuesAcc != centerValuesAcc.end(); ++iteratorCenterValuesAcc){
             if(v[i].first == iteratorCenterValuesAcc->first){//sprawdzam czy rodzaj predkosci sie zgadza
@@ -185,14 +204,20 @@ void FuzzyDriver::check() {
         }
     }
     newAcc = sum/weightSum;//srednia wazona
+    std::cout << sum << ", " << weightSum << std::endl;
     std::cout << "Nowe przyspieszenie wynosi: " << newAcc << std::endl;//tutaj powinna byc i chyba jest nowa wartosc przyspieszenia
     // trzeba te wartosc przekazac do samochodu, nie wiem czemu ale w drugiej iteracji sie nie liczy :( blad jest chybaa w tym, ze nie zalicza reguly chuj wie czemu
+    acceleration = newAcc;
 }
 
 void FuzzyDriver::calculateCenterValues() {
     for(int i = 0; i < accelerationVector.size(); ++i){
         centerValuesAcc[accelerationVector[i].name] = (accelerationVector[i].M + accelerationVector[i].N)/2;
     }
+}
+
+const std::vector<Parameters> &FuzzyDriver::getSpeedVector() const {
+    return speedVector;
 }
 
 

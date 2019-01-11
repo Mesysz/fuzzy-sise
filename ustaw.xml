@@ -32,8 +32,8 @@
         </PARAM>
         <PARAM>
             <NAME>normal</NAME>
-            <A>10</A>
-            <M>100</M>
+            <A>100</A>
+            <M>300</M>
             <N>900</N>
             <B>1100</B>
         </PARAM>
@@ -41,8 +41,8 @@
             <NAME>near</NAME>
             <A>3</A>
             <M>5</M>
-            <N>10</N>
-            <B>100</B>
+            <N>100</N>
+            <B>300</B>
         </PARAM>
         <PARAM>
             <NAME>dangerously_close</NAME>

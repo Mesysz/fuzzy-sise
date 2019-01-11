@@ -6,7 +6,6 @@
 #include <SFML/Graphics.hpp>
 void Road::simulate() {
     bool notEnd = true;
-    int i = 0;
     std::string source = "../ustaw.xml";
     fuzzyDriver.readRegs(source.c_str());
     sf::RenderWindow window(sf::VideoMode(100, 500), "SFML Works!");
@@ -26,12 +25,15 @@ void Road::simulate() {
                 notEnd = false;
             }
         }
-        fuzzyDriver.calculateState(speedA, speedB, speedC, distanceAB, distanceAC, distanceToEnd, rightLane);
         speedA += fuzzyDriver.getAcceleration();
+        if(speedA > fuzzyDriver.getSpeedVector().begin()->B){
+            speedA = fuzzyDriver.getSpeedVector().begin()->B;
+        }
         rightLane = fuzzyDriver.getLane();
         distanceAB += speedB - speedA;
         distanceAC -= speedA + speedC;
         distanceToEnd -= speedA;
+        fuzzyDriver.calculateState(speedA, speedB, speedC, distanceAB, distanceAC, distanceToEnd, rightLane);
         window.clear();
         carA.setPosition(50, distanceToEnd / divider);
         carB.setPosition(50, distanceToEnd / divider - distanceAB / divider);
@@ -40,7 +42,7 @@ void Road::simulate() {
         window.draw(carB);
         window.draw(carC);
         std::cout << speedA << " " << speedB << " " << speedC << " " << distanceAB << " " << distanceAC << " "
-                  << distanceToEnd << " " << rightLane << std::endl;
+                  << distanceToEnd << " " << rightLane << " " << fuzzyDriver.getAcceleration() << std::endl;
         window.display();
     }
 }

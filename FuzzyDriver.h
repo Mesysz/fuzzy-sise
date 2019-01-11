@@ -19,6 +19,10 @@ private:
     std::string lane2;
 
     std::vector<Parameters> speedVector;
+public:
+    const std::vector<Parameters> &getSpeedVector() const;
+
+private:
     std::vector<Parameters> distanceVector;
     std::vector<Parameters> laneVector;
     std::vector<Parameters> accelerationVector;
