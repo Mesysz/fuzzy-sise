@@ -21,12 +21,12 @@ class Road {
     double distanceAB;
     double distanceAC;
     double distanceToEnd;
-    bool rightLane;
+    Lane lane;
 public:
     void simulate();
 
     Road(double speedA, double speedB, double speedC, double distanceAB, double distanceAC, double distanceToEnd,
-         bool rightLane);
+         Lane lane);
 };
 
 

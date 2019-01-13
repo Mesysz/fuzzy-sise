@@ -659,18 +659,18 @@
                 <LANE>right</LANE>
             </THEN>
         </RULE>
-        <RULE>
-            <IF>
-                <SPEED_A>medium</SPEED_A>
-                <DISTANCE_AB>dangerously_close</DISTANCE_AB>
-                <DISTANCE_AC>behind</DISTANCE_AC>
-                <LANE>right</LANE>
-            </IF>
-            <THEN>
-                <ACCELERATION>high</ACCELERATION>
-                <LANE>left</LANE>
-            </THEN>
-        </RULE>
+        <!--<RULE>-->
+        <!--<IF>-->
+        <!--<SPEED_A>medium</SPEED_A>-->
+        <!--<DISTANCE_AB>dangerously_close</DISTANCE_AB>-->
+        <!--<DISTANCE_AC>behind</DISTANCE_AC>-->
+        <!--<LANE>right</LANE>-->
+        <!--</IF>-->
+        <!--<THEN>-->
+        <!--<ACCELERATION>high</ACCELERATION>-->
+        <!--<LANE>left</LANE>-->
+        <!--</THEN>-->
+        <!--</RULE>-->
         <RULE>
             <IF>
                 <SPEED_A>slow</SPEED_A>

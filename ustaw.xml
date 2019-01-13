@@ -107,23 +107,23 @@
         <PARAM>
             <NAME>small_break</NAME>
             <A>0.0</A>
-            <M>0.1</M>
-            <N>2.5</N>
-            <B>3.5</B>
+            <M>-0.1</M>
+            <N>-2.5</N>
+            <B>-3.5</B>
         </PARAM>
         <PARAM>
             <NAME>medium_break</NAME>
-            <A>2.5</A>
-            <M>3.5</M>
-            <N>5.5</N>
-            <B>6.5</B>
+            <A>-2.5</A>
+            <M>-3.5</M>
+            <N>-5.5</N>
+            <B>-6.5</B>
         </PARAM>
         <PARAM>
             <NAME>high_break</NAME>
-            <A>5.5</A>
-            <M>6.5</M>
-            <N>9.0</N>
-            <B>9.0</B>
+            <A>-5.5</A>
+            <M>-6.5</M>
+            <N>-9.0</N>
+            <B>-9.0</B>
         </PARAM>
     </ACCELERATION>
 </PARAMETERS>

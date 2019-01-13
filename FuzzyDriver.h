@@ -15,7 +15,7 @@
 class FuzzyDriver {
 private:
     double acceleration;
-    bool lane;
+    Lane lane;
     std::string lane2;
 
     std::vector<Parameters> speedVector;
@@ -38,7 +38,7 @@ private:
     std::map<std::string, double> centerValuesAcc;
 
             void fuzzyficate(double speedA, double speedB, double speedC, double distanceAB, double distanceAC,
-                     double distanceToEnd, bool rightLane);
+                             double distanceToEnd, Lane currlane);
 
     void decide();
 
@@ -47,14 +47,14 @@ private:
     std::vector<std::pair<std::string, double>> get_membership(double value, std::vector<Parameters> params);
 
 public:
-    FuzzyDriver(double acceleration, bool lane);
+    FuzzyDriver(double acceleration, Lane lane);
 
     void calculateState(double speedA, double speedB, double speedC, double distanceAB, double distanceAC,
-                        double distanceToEnd, bool rightLane);
+                        double distanceToEnd, Lane rightLane);
 
     double getAcceleration() const;
 
-    bool getLane() const;
+    Lane getLane() const;
 
     void readRegs(const char *source);
 

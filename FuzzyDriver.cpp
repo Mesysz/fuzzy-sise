@@ -5,7 +5,7 @@
 #include "FuzzyDriver.h"
 
 void FuzzyDriver::calculateState(double speedA, double speedB, double speedC, double distanceAB, double distanceAC,
-                                 double distanceToEnd, bool rightLane) {
+                                 double distanceToEnd, Lane rightLane) {
     fuzzyficate(speedA, speedB, speedC, distanceAB, distanceAC, distanceToEnd, rightLane);
     check();
 }
@@ -14,11 +14,11 @@ double FuzzyDriver::getAcceleration() const {
     return acceleration;
 }
 
-bool FuzzyDriver::getLane() const {
+Lane FuzzyDriver::getLane() const {
     return lane;
 }
 
-FuzzyDriver::FuzzyDriver(double acceleration, bool lane) : acceleration(acceleration), lane(lane) {
+FuzzyDriver::FuzzyDriver(double acceleration, Lane lane) : acceleration(acceleration), lane(lane) {
 
 }
 
@@ -35,14 +35,14 @@ std::vector<std::pair<std::string, double>> FuzzyDriver::get_membership(double v
 }
 
 void FuzzyDriver::fuzzyficate(double speedA, double speedB, double speedC, double distanceAB, double distanceAC,
-                              double distanceToEnd, bool rightLane) {
+                              double distanceToEnd, Lane currline) {
     t1 = get_membership(speedA, speedVector);
     t2 = get_membership(speedB, speedVector);
     t3 = get_membership(speedC, speedVector);
     t4 = get_membership(distanceAB, distanceVector);
     t5 = get_membership(distanceAC, distanceVector);
     t6 = get_membership(distanceToEnd, distanceVector);
-    if(!rightLane){
+    if (currline == left) {
         lane2 = "right";
     }
     else{
@@ -56,31 +56,33 @@ void FuzzyDriver::fuzzyficate(double speedA, double speedB, double speedC, doubl
 
 //    DEBUGOWANIE BARDZO XD
 //
-    std::cout << "speedA:        ";
+#ifdef LOG_TO_CONSOLE
+    std::cout<<lane2<<"##################\nspeedA:        ";
     for (auto i : t1) {
         if (i.second > 0) std::cout << i.first << " " << i.second << " ";
     }
-    std::cout << std::endl << "speedB:        ";
+    std::cout << "\nspeedB:        ";
     for (auto i : t2) {
-        std::cout << i.first << " " << i.second << " ";
+        if (i.second > 0) std::cout << i.first << " " << i.second << " ";
     }
-    std::cout << std::endl << "speedC:        ";
+    std::cout << "\nspeedC:        ";
     for (auto i : t3) {
         if (i.second > 0) std::cout << i.first << " " << i.second << " ";
     }
-    std::cout << std::endl << "distanceAB:    ";
+    std::cout << "\ndistanceAB:    ";
     for (auto i : t4) {
         if (i.second > 0) std::cout << i.first << " " << i.second << " ";
     }
-    std::cout << std::endl << "distanceAC:    ";
+    std::cout << "\ndistanceAC:    ";
     for (auto i : t5) {
         if (i.second > 0) std::cout << i.first << " " << i.second << " ";
     }
-    std::cout << std::endl << "distanceToEnd: ";
+    std::cout << "\ndistanceToEnd: ";
     for (auto i : t6) {
         if (i.second > 0) std::cout << i.first << " " << i.second << " ";
     }
-    std::cout << std::endl;
+    std::cout << "\n";
+#endif
 }
 
 void FuzzyDriver::decide() {
@@ -149,52 +151,61 @@ void FuzzyDriver::check() {
     std::map<std::vector<std::pair<std::string, std::string>>, std::vector<std::pair<std::string, std::string>>>::iterator it;
     it = rulesMap.begin();
     std::vector<std::pair<std::string, double>> v;
-    std::string newLane = "right";
-    for(; it != rulesMap.end(); ++it){
-        int conditions {0};
+    std::string currLine = lane == right ? "right" : "left";
+
+
+    for (auto it : rulesMap) {
+        if (it.first.back().second != currLine)
+            continue;
+        int conditions{1};
         double coefficient {2};
-        for(int i = 0; i < it->first.size(); ++i){
-            std::string temp1 = it->first[i].first;
-            std::string temp2 = it->first[i].second;
-            for(int j = 0; j < tMap[temp1].size(); ++j){
-                if(tMap[temp1].at(j).first == temp2 && tMap[temp1].at(j).second > 0){//do tego ifa wejdzie jeśli pojedynczy warunek z reguly jest spelniony
+        for (auto i : it.first) {
+            std::string temp1 = i.first;
+            std::string temp2 = i.second;
+            for (auto j : tMap[temp1]) {
+                if (j.first == temp2 &&
+                    j.second > 0) {//do tego ifa wejdzie jeśli pojedynczy warunek z reguly jest spelniony
                     ++conditions;// licze warunki, zeby potem sprawdzic czy wszystkie zostaly spelnione z reguly
-                    if(tMap[temp1].at(j).second < coefficient){// szukam minimum
-                        coefficient = tMap[temp1].at(j).second;
+                    if (j.second < coefficient) {// szukam minimum
+                        coefficient = j.second;
                     }
                 }
             }
+//            for(int j = 0; j < tMap[temp1].size(); ++j){
+//                if(tMap[temp1].at(j).first == temp2 && tMap[temp1].at(j).second > 0){//do tego ifa wejdzie jeśli pojedynczy warunek z reguly jest spelniony
+//                    ++conditions;// licze warunki, zeby potem sprawdzic czy wszystkie zostaly spelnione z reguly
+//                    if(tMap[temp1].at(j).second < coefficient){// szukam minimum
+//                        coefficient = tMap[temp1].at(j).second;
+//                    }
+//                }
+//            }
         }
-        if(it->first.back().second == lane2){//sprawdzam warunek na tor jazdy
-            ++conditions;
-        }
-        if(coefficient != 2 && conditions == it->first.size()){//jesli wszystkie warunki spelnione to dodaje do wektora rodzaj przyspieszenia i wartosc minimum
-            std::pair<std::string, double> pairNewAcc (it->second.at(0).second, coefficient);
+//        lane2 = "right";
+////        std::cout<<it->first.back().second<<"\n";
+//        if(it->first.back().second == lane2){//sprawdzam warunek na tor jazdy
+//            ++conditions;
+//        }
+        if (coefficient != 2 && conditions ==
+                                it.first.size()) {//jesli wszystkie warunki spelnione to dodaje do wektora rodzaj przyspieszenia i wartosc minimum
+            std::pair<std::string, double> pairNewAcc(it.second.at(0).second, coefficient);
             v.emplace_back(pairNewAcc);
-            if(lane2 == "right" && it->second.back().second == "left"){
-                newLane = "left";
-            }
-            if(lane2 == "left" && it->second.back().second == "right"){
-                newLane = "right";
-            }
+            if (it.second.back().second == "left")
+                lane = left;
+            if (it.second.back().second == "right")
+                lane = right;
+#ifdef LOG_TO_CONSOLE
             std::cout << "Nowa linia: " << it->second.back().second << std::endl;
+#endif
         }
     }
-    if(newLane == "right"){
-        lane = 0;
-    }
-    else{
-        lane = 1;
-    }
-    std::cout <<  std::endl;
-    std::cout <<  std::endl;
-    std::cout <<  std::endl;
-    std::cout <<  std::endl;
-    double weightSum {0};
+    double weightSum{1};
     double sum {0};
     double newAcc {0};
     std::map<std::string, double>::iterator iteratorCenterValuesAcc = centerValuesAcc.begin();
+    std::cout << "DUPA" << centerValuesAcc.size() << "\n";
+#ifdef LOG_TO_CONSOLE
     std::cout << "Ilosc dobrych regul to : " << v.size() << std::endl;
+#endif
     for(int i = 0; i < v.size(); ++i){
         for(; iteratorCenterValuesAcc != centerValuesAcc.end(); ++iteratorCenterValuesAcc){
             if(v[i].first == iteratorCenterValuesAcc->first){//sprawdzam czy rodzaj predkosci sie zgadza
@@ -204,9 +215,12 @@ void FuzzyDriver::check() {
         }
     }
     newAcc = sum/weightSum;//srednia wazona
+    std::cout << (newAcc == 0) << " " << sum << " " << weightSum << "\n";
+#ifdef LOG_TO_CONSOLE
     std::cout << sum << ", " << weightSum << std::endl;
     std::cout << "Nowe przyspieszenie wynosi: " << newAcc << std::endl;//tutaj powinna byc i chyba jest nowa wartosc przyspieszenia
     // trzeba te wartosc przekazac do samochodu, nie wiem czemu ale w drugiej iteracji sie nie liczy :( blad jest chybaa w tym, ze nie zalicza reguly chuj wie czemu
+#endif
     acceleration = newAcc;
 }
 
