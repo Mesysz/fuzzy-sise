@@ -526,8 +526,8 @@
                 <LANE>right</LANE>
             </IF>
             <THEN>
-                <ACCELERATION>high</ACCELERATION>
-                <LANE>left</LANE>
+                <ACCELERATION>medium_break</ACCELERATION>
+                <LANE>right</LANE>
             </THEN>
         </RULE>
         <RULE>
