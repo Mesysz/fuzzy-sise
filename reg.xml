@@ -242,7 +242,7 @@
                 <LANE>right</LANE>
             </IF>
             <THEN>
-                <ACCELERATION>small_break</ACCELERATION>
+                <ACCELERATION>medium_break</ACCELERATION>
                 <LANE>right</LANE>
             </THEN>
         </RULE>
@@ -255,7 +255,7 @@
                 <LANE>right</LANE>
             </IF>
             <THEN>
-                <ACCELERATION>medium_break</ACCELERATION>
+                <ACCELERATION>high_break</ACCELERATION>
                 <LANE>right</LANE>
             </THEN>
         </RULE>
@@ -821,6 +821,16 @@
             <THEN>
                 <ACCELERATION>high</ACCELERATION>
                 <LANE>left</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <DISTANCE_AC>near</DISTANCE_AC>
+                <LANE>left</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>high_break</ACCELERATION>
+                <LANE>right</LANE>
             </THEN>
         </RULE>
     </BASE>

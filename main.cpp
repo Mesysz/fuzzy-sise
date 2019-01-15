@@ -10,6 +10,7 @@
 
 int main()
 {
+    for(int i = 0; i < 100; ++i){
     std::cout<<"Authors: Antoni Messyasz, Barlomiej Szewczyk"<<std::endl;
     std::cout << "Hello Road!" << std::endl;
     std::uniform_real_distribution<double> random_speed(6.0, 25.0);
@@ -25,5 +26,5 @@ int main()
     double distanceToEnd = 2000.0;
     //speedA, speedB, speedC, distanceAB, distanceAC, distanceToEnd, rightLane
     Road road(speedA, speedB, speedC, distanceAB, distanceAC, distanceToEnd, right);
-    road.simulate();
+    road.simulate();}
 }
