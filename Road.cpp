@@ -9,11 +9,13 @@
 #include <random>
 #include <chrono>
 
+
 void Road::simulate() {
     bool notEnd = true;
     std::string source = "../ustaw.xml";
     fuzzyDriver.readRegs(source.c_str());
     double maxSpeed = fuzzyDriver.getSpeedVector().begin()->B;
+#ifndef NO_GRAPHICS
     sf::RenderWindow window(sf::VideoMode(100, 500), "SFML Works!");
     float divider = 2000 / window.getSize().y;
     sf::CircleShape carA(5.f);
@@ -22,6 +24,9 @@ void Road::simulate() {
     carA.setFillColor(sf::Color::Green);
     carB.setFillColor(sf::Color::Red);
     carC.setFillColor(sf::Color::Yellow);
+#else
+    float divider = 1;
+#endif
     std::uniform_int_distribution<int> possibility(0, 10);
 //    std::random_device r;
     std::default_random_engine re(std::chrono::system_clock::now().time_since_epoch().count());
@@ -29,11 +34,14 @@ void Road::simulate() {
     bool crashed = false;
     while (notEnd) {
         if (distanceToEnd < 0) {
+#ifndef NO_GRAPHICS
             window.close();
+#endif
             notEnd = false;
             break;
         }
         //std::this_thread::sleep_for(std::chrono::seconds(1));
+#ifndef NO_GRAPHICS
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
         sf::Event event{};
         while (window.pollEvent(event)) {
@@ -43,6 +51,7 @@ void Road::simulate() {
                 break;
             }
         }
+#endif
         fuzzyDriver.calculateState(speedA, speedB, speedC, distanceAB, distanceAC, distanceToEnd, lane);
         speedA += fuzzyDriver.getAcceleration();
         speedB += possibility(re) % 10 == 0 ? possibility(re) % 2 == 0 ? 0.5 : -0.5 : 0;
@@ -57,20 +66,33 @@ void Road::simulate() {
         prevDistAC = distanceAC;
         distanceAC -= speedA + speedC;
         if (distanceAC < 0 && prevDistAC > 0 && lane == left) {
+#ifndef NO_GRAPHICS
             window.close();
+#endif
             notEnd = false;
             crashed = true;
             break;
         }
         distanceToEnd -= speedA;
         if (distanceAB > distanceToEnd) {
+#ifndef NO_GRAPHICS
             window.close();
+#endif
+            notEnd = false;
+            break;
+        }
+        if (distanceAB < 2 && distanceAB > -2) {
             notEnd = false;
             crashed = true;
             break;
         }
 //        std::cout << "A " << speedA << " B " << speedB << " C " << speedC << " distance AB " << distanceAB
 //                  << " distance AC " << distanceAC << "\n";
+#ifdef LOG_TO_CONSOLE
+        std::cout << speedA << " " << speedB << " " << speedC << " " << distanceAB << " " << distanceAC << " "
+                  << distanceToEnd << " " << rightLane << " " << fuzzyDriver.getAcceleration() << std::endl;
+#endif
+#ifndef NO_GRAPHICS
         carA.setPosition(50 - lane * 25, distanceToEnd / divider);
         carB.setPosition(50, distanceToEnd / divider - distanceAB / divider);
         carC.setPosition(25, distanceToEnd / divider - distanceAC / divider);
@@ -78,14 +100,12 @@ void Road::simulate() {
         window.draw(carA);
         window.draw(carB);
         window.draw(carC);
-#ifdef LOG_TO_CONSOLE
-        std::cout << speedA << " " << speedB << " " << speedC << " " << distanceAB << " " << distanceAC << " "
-                  << distanceToEnd << " " << rightLane << " " << fuzzyDriver.getAcceleration() << std::endl;
-#endif
         window.display();
+#endif
     }
-    std::string result = (distanceAB < 0 && !crashed && lane == right) ? "Udalo sie!\n" : "Nie udalo sie :(\n";
-    std::cout << result;
+    std::string result = (distanceAB < 0 && !crashed && lane == right && distanceToEnd < 0) ? "Udalo sie!\n"
+                                                                                            : "Nie udalo sie :(\n";
+    std::cout << "Wypadek :" << (crashed ? "tak " : "nie ") << result;
 }
 
 Road::Road(double speedA, double speedB, double speedC, double distanceAB, double distanceAC, double distanceToEnd,

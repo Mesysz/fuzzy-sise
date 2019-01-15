@@ -50,7 +50,7 @@ void FuzzyDriver::fuzzyficate(double speedA, double speedB, double speedC, doubl
 
 //    DEBUGOWANIE BARDZO XD
 //
-//#ifdef LOG_TO_CONSOLE
+#ifdef LOG_TO_CONSOLE
     std::cout << "##################\nCurrent line:  " << ((currline == left) ? "left" : "right")
               << "\nspeedA:        ";
     for (auto i : t1) {
@@ -77,7 +77,7 @@ void FuzzyDriver::fuzzyficate(double speedA, double speedB, double speedC, doubl
         if (i.second > 0) std::cout << i.first << " " << i.second << " ";
     }
     std::cout << "\n";
-//#endif
+#endif
 }
 
 void FuzzyDriver::decide() {
