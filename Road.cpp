@@ -6,10 +6,12 @@
 
 #include "Road.h"
 #include <SFML/Graphics.hpp>
+#include <random>
 void Road::simulate() {
     bool notEnd = true;
     std::string source = "../ustaw.xml";
     fuzzyDriver.readRegs(source.c_str());
+    double maxSpeed = fuzzyDriver.getSpeedVector().begin()->B;
     sf::RenderWindow window(sf::VideoMode(100, 500), "SFML Works!");
     float divider = 2000 / window.getSize().y;
     sf::CircleShape carA(5.f);
@@ -18,34 +20,43 @@ void Road::simulate() {
     carA.setFillColor(sf::Color::Green);
     carB.setFillColor(sf::Color::Red);
     carC.setFillColor(sf::Color::Yellow);
+    std::uniform_int_distribution<int> possibility(0, 10);
+    std::random_device r;
+    std::default_random_engine re(r());
     while (notEnd) {
-        //std::this_thread::sleep_for(std::chrono::seconds(1));
         if (distanceToEnd < 0) {
             window.close();
             notEnd = false;
+            break;
         }
+        //std::this_thread::sleep_for(std::chrono::seconds(1));
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        sf::Event event;
+        sf::Event event{};
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 window.close();
                 notEnd = false;
+                break;
             }
         }
+        fuzzyDriver.calculateState(speedA, speedB, speedC, distanceAB, distanceAC, distanceToEnd, lane);
         speedA += fuzzyDriver.getAcceleration();
-        if(speedA > fuzzyDriver.getSpeedVector().begin()->B){
-            speedA = fuzzyDriver.getSpeedVector().begin()->B;
-        }
+        speedB += possibility(re) % 10 == 0 ? possibility(re) % 2 == 0 ? 0.5 : -0.5 : 0;
+        speedC += possibility(re) % 10 == 0 ? possibility(re) % 2 == 0 ? 0.5 : -0.5 : 0;
+        if (speedA > maxSpeed) speedA = maxSpeed;
+        if (speedB > maxSpeed) speedB = maxSpeed;
+        if (speedC > maxSpeed) speedC = maxSpeed;
+        if (speedB < 0) speedB = 0;
+        if (speedC < 0) speedC = 0;
         lane = fuzzyDriver.getLane();
         distanceAB += speedB - speedA;
         distanceAC -= speedA + speedC;
         distanceToEnd -= speedA;
-        fuzzyDriver.calculateState(speedA, speedB, speedC, distanceAB, distanceAC, distanceToEnd, lane);
-        window.clear();
-        //std::cout<<fuzzyDriver.getAcceleration()<<" "<<speedA<<" "<<distanceToEnd<<" "<<distanceAC<<" "<<distanceAB<<"\n";
+//        std::cout<<"A "<<speedA<<" B "<<speedB<<" C "<<speedC<<" distance AB "<<distanceAB<<" distance AC "<<distanceAC<<"\n";
         carA.setPosition(50 - lane * 25, distanceToEnd / divider);
         carB.setPosition(50, distanceToEnd / divider - distanceAB / divider);
         carC.setPosition(25, distanceToEnd / divider - distanceAC / divider);
+        window.clear();
         window.draw(carA);
         window.draw(carB);
         window.draw(carC);

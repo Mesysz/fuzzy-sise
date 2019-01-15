@@ -56,7 +56,7 @@ void FuzzyDriver::fuzzyficate(double speedA, double speedB, double speedC, doubl
 
 //    DEBUGOWANIE BARDZO XD
 //
-#ifdef LOG_TO_CONSOLE
+//#ifdef LOG_TO_CONSOLE
     std::cout<<lane2<<"##################\nspeedA:        ";
     for (auto i : t1) {
         if (i.second > 0) std::cout << i.first << " " << i.second << " ";
@@ -82,7 +82,7 @@ void FuzzyDriver::fuzzyficate(double speedA, double speedB, double speedC, doubl
         if (i.second > 0) std::cout << i.first << " " << i.second << " ";
     }
     std::cout << "\n";
-#endif
+//#endif
 }
 
 void FuzzyDriver::decide() {
@@ -98,7 +98,7 @@ void FuzzyDriver::readRegs(const char *source) {
     readParam("DISTANCE", source, distanceVector);
     readParam("LANE", source, laneVector);
     readParam("ACCELERATION", source, accelerationVector);
-    readRules("COS", "../reg.xml");
+    readRules("../reg.xml");
     calculateCenterValues();
 }
 
@@ -126,7 +126,7 @@ void FuzzyDriver::readParam(std::string param, const char *source, std::vector<P
     }
 }
 
-void FuzzyDriver::readRules(std::string param, const char *source) {
+void FuzzyDriver::readRules(const char *source) {
     tinyxml2::XMLDocument xmlDocument;
     xmlDocument.LoadFile(source);
     tinyxml2::XMLElement* element = xmlDocument.FirstChildElement("BASE")->FirstChildElement("RULE");
@@ -148,21 +148,18 @@ void FuzzyDriver::readRules(std::string param, const char *source) {
 }
 
 void FuzzyDriver::check() {
-    std::map<std::vector<std::pair<std::string, std::string>>, std::vector<std::pair<std::string, std::string>>>::iterator it;
-    it = rulesMap.begin();
     std::vector<std::pair<std::string, double>> v;
     std::string currLine = lane == right ? "right" : "left";
 
-
-    for (auto it : rulesMap) {
+    for (const auto &it : rulesMap) {
         if (it.first.back().second != currLine)
             continue;
         int conditions{1};
         double coefficient {2};
-        for (auto i : it.first) {
+        for (const auto &i : it.first) {
             std::string temp1 = i.first;
             std::string temp2 = i.second;
-            for (auto j : tMap[temp1]) {
+            for (const auto &j : tMap[temp1]) {
                 if (j.first == temp2 &&
                     j.second > 0) {//do tego ifa wejdzie jeśli pojedynczy warunek z reguly jest spelniony
                     ++conditions;// licze warunki, zeby potem sprawdzic czy wszystkie zostaly spelnione z reguly
@@ -171,20 +168,7 @@ void FuzzyDriver::check() {
                     }
                 }
             }
-//            for(int j = 0; j < tMap[temp1].size(); ++j){
-//                if(tMap[temp1].at(j).first == temp2 && tMap[temp1].at(j).second > 0){//do tego ifa wejdzie jeśli pojedynczy warunek z reguly jest spelniony
-//                    ++conditions;// licze warunki, zeby potem sprawdzic czy wszystkie zostaly spelnione z reguly
-//                    if(tMap[temp1].at(j).second < coefficient){// szukam minimum
-//                        coefficient = tMap[temp1].at(j).second;
-//                    }
-//                }
-//            }
         }
-//        lane2 = "right";
-////        std::cout<<it->first.back().second<<"\n";
-//        if(it->first.back().second == lane2){//sprawdzam warunek na tor jazdy
-//            ++conditions;
-//        }
         if (coefficient != 2 && conditions ==
                                 it.first.size()) {//jesli wszystkie warunki spelnione to dodaje do wektora rodzaj przyspieszenia i wartosc minimum
             std::pair<std::string, double> pairNewAcc(it.second.at(0).second, coefficient);
@@ -198,11 +182,10 @@ void FuzzyDriver::check() {
 #endif
         }
     }
-    double weightSum{1};
+    double weightSum{0};
     double sum {0};
     double newAcc {0};
     std::map<std::string, double>::iterator iteratorCenterValuesAcc = centerValuesAcc.begin();
-    std::cout << "DUPA" << centerValuesAcc.size() << "\n";
 #ifdef LOG_TO_CONSOLE
     std::cout << "Ilosc dobrych regul to : " << v.size() << std::endl;
 #endif
@@ -215,7 +198,6 @@ void FuzzyDriver::check() {
         }
     }
     newAcc = sum/weightSum;//srednia wazona
-    std::cout << (newAcc == 0) << " " << sum << " " << weightSum << "\n";
 #ifdef LOG_TO_CONSOLE
     std::cout << sum << ", " << weightSum << std::endl;
     std::cout << "Nowe przyspieszenie wynosi: " << newAcc << std::endl;//tutaj powinna byc i chyba jest nowa wartosc przyspieszenia

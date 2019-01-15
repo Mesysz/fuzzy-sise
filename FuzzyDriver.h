@@ -60,7 +60,7 @@ public:
 
     void readParam(std::string param, const char *source, std::vector<Parameters> &vector);
 
-    void readRules(std::string param, const char *source);
+    void readRules(const char *source);
 
     void check();
 
