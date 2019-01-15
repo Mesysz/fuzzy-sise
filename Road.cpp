@@ -63,6 +63,12 @@ void Road::simulate() {
             break;
         }
         distanceToEnd -= speedA;
+        if (distanceAB > distanceToEnd) {
+            window.close();
+            notEnd = false;
+            crashed = true;
+            break;
+        }
 //        std::cout << "A " << speedA << " B " << speedB << " C " << speedC << " distance AB " << distanceAB
 //                  << " distance AC " << distanceAC << "\n";
         carA.setPosition(50 - lane * 25, distanceToEnd / divider);
