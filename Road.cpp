@@ -7,6 +7,8 @@
 #include "Road.h"
 #include <SFML/Graphics.hpp>
 #include <random>
+#include <chrono>
+
 void Road::simulate() {
     bool notEnd = true;
     std::string source = "../ustaw.xml";
@@ -21,8 +23,8 @@ void Road::simulate() {
     carB.setFillColor(sf::Color::Red);
     carC.setFillColor(sf::Color::Yellow);
     std::uniform_int_distribution<int> possibility(0, 10);
-    std::random_device r;
-    std::default_random_engine re(r());
+//    std::random_device r;
+    std::default_random_engine re(std::chrono::system_clock::now().time_since_epoch().count());
     while (notEnd) {
         if (distanceToEnd < 0) {
             window.close();
@@ -52,7 +54,8 @@ void Road::simulate() {
         distanceAB += speedB - speedA;
         distanceAC -= speedA + speedC;
         distanceToEnd -= speedA;
-//        std::cout<<"A "<<speedA<<" B "<<speedB<<" C "<<speedC<<" distance AB "<<distanceAB<<" distance AC "<<distanceAC<<"\n";
+        std::cout << "A " << speedA << " B " << speedB << " C " << speedC << " distance AB " << distanceAB
+                  << " distance AC " << distanceAC << "\n";
         carA.setPosition(50 - lane * 25, distanceToEnd / divider);
         carB.setPosition(50, distanceToEnd / divider - distanceAB / divider);
         carC.setPosition(25, distanceToEnd / divider - distanceAC / divider);
