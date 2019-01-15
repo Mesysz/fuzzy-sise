@@ -42,12 +42,6 @@ void FuzzyDriver::fuzzyficate(double speedA, double speedB, double speedC, doubl
     t4 = get_membership(distanceAB, distanceVector);
     t5 = get_membership(distanceAC, distanceVector);
     t6 = get_membership(distanceToEnd, distanceVector);
-    if (currline == left) {
-        lane2 = "right";
-    }
-    else{
-        lane2 = "left";
-    }
     tMap["SPEED_A"] = t1;
     tMap["SPEED_B"] = t2;
     tMap["SPEED_C"] = t3;
@@ -57,7 +51,8 @@ void FuzzyDriver::fuzzyficate(double speedA, double speedB, double speedC, doubl
 //    DEBUGOWANIE BARDZO XD
 //
 //#ifdef LOG_TO_CONSOLE
-    std::cout<<lane2<<"##################\nspeedA:        ";
+    std::cout << "##################\nCurrent line:  " << ((currline == left) ? "left" : "right")
+              << "\nspeedA:        ";
     for (auto i : t1) {
         if (i.second > 0) std::cout << i.first << " " << i.second << " ";
     }

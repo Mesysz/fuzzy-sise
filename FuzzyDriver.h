@@ -16,7 +16,7 @@ class FuzzyDriver {
 private:
     double acceleration;
     Lane lane;
-    std::string lane2;
+    // std::string lane2;
 
     std::vector<Parameters> speedVector;
 public:
