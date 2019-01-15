@@ -182,18 +182,17 @@ void FuzzyDriver::check() {
 #endif
         }
     }
-    double weightSum{0};
+    double weightSum{1};
     double sum {0};
     double newAcc {0};
-    std::map<std::string, double>::iterator iteratorCenterValuesAcc = centerValuesAcc.begin();
 #ifdef LOG_TO_CONSOLE
     std::cout << "Ilosc dobrych regul to : " << v.size() << std::endl;
 #endif
     for(int i = 0; i < v.size(); ++i){
-        for(; iteratorCenterValuesAcc != centerValuesAcc.end(); ++iteratorCenterValuesAcc){
-            if(v[i].first == iteratorCenterValuesAcc->first){//sprawdzam czy rodzaj predkosci sie zgadza
+        for (auto iteratorCenterValuesAcc : centerValuesAcc) {
+            if (v[i].first == iteratorCenterValuesAcc.first) {//sprawdzam czy rodzaj predkosci sie zgadza
                 weightSum += v[i].second;//sumuje wagi do mianownika
-                sum += v[i].second * iteratorCenterValuesAcc->second; // mnoze przez srodkowa wartosc do licznika
+                sum += v[i].second * iteratorCenterValuesAcc.second; // mnoze przez srodkowa wartosc do licznika
             }
         }
     }
