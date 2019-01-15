@@ -25,6 +25,8 @@ void Road::simulate() {
     std::uniform_int_distribution<int> possibility(0, 10);
 //    std::random_device r;
     std::default_random_engine re(std::chrono::system_clock::now().time_since_epoch().count());
+    double prevDistAC{};
+    bool crashed = false;
     while (notEnd) {
         if (distanceToEnd < 0) {
             window.close();
@@ -52,10 +54,17 @@ void Road::simulate() {
         if (speedC < 0) speedC = 0;
         lane = fuzzyDriver.getLane();
         distanceAB += speedB - speedA;
+        prevDistAC = distanceAC;
         distanceAC -= speedA + speedC;
+        if (distanceAC < 0 && prevDistAC > 0 && lane == left) {
+            window.close();
+            notEnd = false;
+            crashed = true;
+            break;
+        }
         distanceToEnd -= speedA;
-        std::cout << "A " << speedA << " B " << speedB << " C " << speedC << " distance AB " << distanceAB
-                  << " distance AC " << distanceAC << "\n";
+//        std::cout << "A " << speedA << " B " << speedB << " C " << speedC << " distance AB " << distanceAB
+//                  << " distance AC " << distanceAC << "\n";
         carA.setPosition(50 - lane * 25, distanceToEnd / divider);
         carB.setPosition(50, distanceToEnd / divider - distanceAB / divider);
         carC.setPosition(25, distanceToEnd / divider - distanceAC / divider);
@@ -69,6 +78,8 @@ void Road::simulate() {
 #endif
         window.display();
     }
+    std::string result = (distanceAB < 0 && !crashed && lane == right) ? "Udalo sie!\n" : "Nie udalo sie :(\n";
+    std::cout << result;
 }
 
 Road::Road(double speedA, double speedB, double speedC, double distanceAB, double distanceAC, double distanceToEnd,
