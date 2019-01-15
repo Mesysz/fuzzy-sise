@@ -803,4 +803,24 @@
                 <LANE>right</LANE>
             </THEN>
         </RULE>
+        <RULE>
+            <IF>
+                <DISTANCE_AB>dangerously_close</DISTANCE_AB>
+                <LANE>left</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>high</ACCELERATION>
+                <LANE>left</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <DISTANCE_AB>near</DISTANCE_AB>
+                <LANE>left</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>high</ACCELERATION>
+                <LANE>left</LANE>
+            </THEN>
+        </RULE>
     </BASE>
