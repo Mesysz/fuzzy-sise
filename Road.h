@@ -13,7 +13,7 @@
 #include <chrono>
 #include <thread>
 
-//#define NO_GRAPHICS
+#define NO_GRAPHICS
 
 class Road {
     FuzzyDriver fuzzyDriver;

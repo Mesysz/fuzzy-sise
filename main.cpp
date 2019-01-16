@@ -16,7 +16,7 @@ int main()
     std::uniform_real_distribution<double> random_distance(50.0, 2000.0);
     std::default_random_engine re(std::chrono::system_clock::now().time_since_epoch().count());
 //#ifdef NO_GRAPHICS
-    for (int i = 0; i < 100; ++i) {
+    for (int i = 0; i < 1000; ++i) {
 //#endif
         //std::random_device r("mt19937");
         double speedA = random_speed(re);

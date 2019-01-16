@@ -18,9 +18,9 @@ void Road::simulate() {
 #ifndef NO_GRAPHICS
     sf::RenderWindow window(sf::VideoMode(100, 500), "SFML Works!");
     float divider = 2000 / window.getSize().y;
-    sf::CircleShape carA(5.f);
-    sf::CircleShape carB(5.f);
-    sf::CircleShape carC(5.f);
+    sf::CircleShape carA(1.f);
+    sf::CircleShape carB(1.f);
+    sf::CircleShape carC(1.f);
     carA.setFillColor(sf::Color::Green);
     carB.setFillColor(sf::Color::Red);
     carC.setFillColor(sf::Color::Yellow);
@@ -81,7 +81,7 @@ void Road::simulate() {
             notEnd = false;
             break;
         }
-        if (distanceAB < 2 && distanceAB > -2 && lane == right) {
+        if (distanceAB < 4 && distanceAB > -4 && lane == right) {
             notEnd = false;
             crashed = "AB";
             break;
