@@ -83,45 +83,39 @@
         </PARAM>
     </LANE>
     <ACCELERATION>
-        <PARAM>
+        <TRIANGLE>
             <NAME>high</NAME>
             <A>0.3</A>
             <M>1.3</M>
-            <N>1.3</N>
             <B>1.3</B>
-        </PARAM>
-        <PARAM>
+        </TRIANGLE>
+        <TRIANGLE>
             <NAME>small</NAME>
             <A>0.0</A>
-            <M>0.1</M>
-            <N>0.3</N>
+            <M>0.5</M>
             <B>1.0</B>
-        </PARAM>
-        <PARAM>
+        </TRIANGLE>
+        <TRIANGLE>
             <NAME>zero</NAME>
             <A>-0.1</A>
             <M>0</M>
-            <N>0</N>
             <B>0.1</B>
-        </PARAM>
+        </TRIANGLE>
         <PARAM>
             <NAME>small_break</NAME>
             <A>0.0</A>
-            <M>-0.1</M>
-            <N>-2.5</N>
+            <M>-1.7</M>
             <B>-3.5</B>
         </PARAM>
-        <PARAM>
+        <TRIANGLE>
             <NAME>medium_break</NAME>
             <A>-2.5</A>
-            <M>-3.5</M>
-            <N>-5.5</N>
+            <M>-4.5</M>
             <B>-6.5</B>
-        </PARAM>
+        </TRIANGLE>
         <PARAM>
             <NAME>high_break</NAME>
             <A>-5.5</A>
-            <M>-6.5</M>
             <N>-9.0</N>
             <B>-9.0</B>
         </PARAM>

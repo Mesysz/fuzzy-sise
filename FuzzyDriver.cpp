@@ -101,7 +101,9 @@ void FuzzyDriver::readRegs(const char *source) {
 void FuzzyDriver::readParam(std::string param, const char *source, std::vector<Parameters> &vector) {
     tinyxml2::XMLDocument xmlDocument;
     xmlDocument.LoadFile(source);
-    tinyxml2::XMLElement* element = xmlDocument.FirstChildElement("PARAMETERS")->FirstChildElement(param.c_str())->FirstChildElement("PARAM");
+    tinyxml2::XMLElement *element = xmlDocument.FirstChildElement("PARAMETERS")->FirstChildElement(
+            param.c_str())->FirstChildElement();
+    std::string temp2(element->Value());
 
     for (tinyxml2::XMLElement *e = element; e != nullptr; e = e->NextSiblingElement()) {
         tinyxml2::XMLElement* element1 = e->FirstChildElement("NAME");
@@ -112,9 +114,13 @@ void FuzzyDriver::readParam(std::string param, const char *source, std::vector<P
         element1 = element1->NextSiblingElement();
         temp = atof(element1->NextSiblingElement()->GetText());
         parameters.M = temp;
-        element1 = element1->NextSiblingElement();
-        temp = atof(element1->NextSiblingElement()->GetText());
-        parameters.N = temp;
+        if (temp2 == "TRIANGLE") {
+            parameters.N = parameters.M;
+        } else {
+            element1 = element1->NextSiblingElement();
+            temp = atof(element1->NextSiblingElement()->GetText());
+            parameters.N = temp;
+        }
         element1 = element1->NextSiblingElement();
         temp = atof(element1->NextSiblingElement()->GetText());
         parameters.B = temp;
