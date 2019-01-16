@@ -31,7 +31,7 @@ void Road::simulate() {
 //    std::random_device r;
     std::default_random_engine re(std::chrono::system_clock::now().time_since_epoch().count());
     double prevDistAC{};
-    bool crashed = false;
+    std::string crashed{};
     while (notEnd) {
         if (distanceToEnd < 0) {
 #ifndef NO_GRAPHICS
@@ -70,7 +70,7 @@ void Road::simulate() {
             window.close();
 #endif
             notEnd = false;
-            crashed = true;
+            crashed = "AC";
             break;
         }
         distanceToEnd -= speedA;
@@ -81,9 +81,9 @@ void Road::simulate() {
             notEnd = false;
             break;
         }
-        if (distanceAB < 2 && distanceAB > -2) {
+        if (distanceAB < 2 && distanceAB > -2 && lane == right) {
             notEnd = false;
-            crashed = true;
+            crashed = "AB";
             break;
         }
 //        std::cout << "A " << speedA << " B " << speedB << " C " << speedC << " distance AB " << distanceAB
@@ -103,9 +103,9 @@ void Road::simulate() {
         window.display();
 #endif
     }
-    std::string result = (distanceAB < 0 && !crashed && lane == right && distanceToEnd < 0) ? "Udalo sie!\n"
-                                                                                            : "Nie udalo sie :(\n";
-    std::cout << "Wypadek :" << (crashed ? "tak " : "nie ") << result;
+    std::string result = (distanceAB < 0 && crashed == "" && lane == right && distanceToEnd < 0) ? "TAK"
+                                                                                                 : "NIE";
+    std::cout << result << " Wypadek: " << crashed << "\n";
 }
 
 Road::Road(double speedA, double speedB, double speedC, double distanceAB, double distanceAC, double distanceToEnd,
