@@ -90,6 +90,20 @@
                 <SPEED_A>fast</SPEED_A>
                 <DISTANCE_AB>near</DISTANCE_AB>
                 <DISTANCE_AC>far</DISTANCE_AC>
+                <DISTANCE_END>far</DISTANCE_END>
+                <LANE>right</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>high</ACCELERATION>
+                <LANE>left</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <SPEED_A>fast</SPEED_A>
+                <DISTANCE_AB>near</DISTANCE_AB>
+                <DISTANCE_AC>far</DISTANCE_AC>
+                <DISTANCE_END>normal</DISTANCE_END>
                 <LANE>right</LANE>
             </IF>
             <THEN>
@@ -145,6 +159,22 @@
                 <SPEED_C>slow</SPEED_C>
                 <DISTANCE_AB>near</DISTANCE_AB>
                 <DISTANCE_AC>normal</DISTANCE_AC>
+                <DISTANCE_END>normal</DISTANCE_END>
+                <LANE>right</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>high</ACCELERATION>
+                <LANE>left</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <SPEED_A>fast</SPEED_A>
+                <SPEED_B>medium</SPEED_B>
+                <SPEED_C>slow</SPEED_C>
+                <DISTANCE_AB>near</DISTANCE_AB>
+                <DISTANCE_AC>normal</DISTANCE_AC>
+                <DISTANCE_END>far</DISTANCE_END>
                 <LANE>right</LANE>
             </IF>
             <THEN>
@@ -173,6 +203,22 @@
                 <SPEED_C>medium</SPEED_C>
                 <DISTANCE_AB>near</DISTANCE_AB>
                 <DISTANCE_AC>normal</DISTANCE_AC>
+                <DISTANCE_END>far</DISTANCE_END>
+                <LANE>right</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>high</ACCELERATION>
+                <LANE>left</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <SPEED_A>fast</SPEED_A>
+                <SPEED_B>slow</SPEED_B>
+                <SPEED_C>medium</SPEED_C>
+                <DISTANCE_AB>near</DISTANCE_AB>
+                <DISTANCE_AC>normal</DISTANCE_AC>
+                <DISTANCE_END>normal</DISTANCE_END>
                 <LANE>right</LANE>
             </IF>
             <THEN>
@@ -187,6 +233,22 @@
                 <SPEED_C>slow</SPEED_C>
                 <DISTANCE_AB>near</DISTANCE_AB>
                 <DISTANCE_AC>normal</DISTANCE_AC>
+                <DISTANCE_END>far</DISTANCE_END>
+                <LANE>right</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>high</ACCELERATION>
+                <LANE>left</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <SPEED_A>fast</SPEED_A>
+                <SPEED_B>slow</SPEED_B>
+                <SPEED_C>slow</SPEED_C>
+                <DISTANCE_AB>near</DISTANCE_AB>
+                <DISTANCE_AC>normal</DISTANCE_AC>
+                <DISTANCE_END>normal</DISTANCE_END>
                 <LANE>right</LANE>
             </IF>
             <THEN>
@@ -316,6 +378,20 @@
                 <SPEED_A>fast</SPEED_A>
                 <DISTANCE_AB>near</DISTANCE_AB>
                 <DISTANCE_AC>behind</DISTANCE_AC>
+                <DISTANCE_END>far</DISTANCE_END>
+                <LANE>right</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>high</ACCELERATION>
+                <LANE>left</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <SPEED_A>fast</SPEED_A>
+                <DISTANCE_AB>near</DISTANCE_AB>
+                <DISTANCE_AC>behind</DISTANCE_AC>
+                <DISTANCE_END>normal</DISTANCE_END>
                 <LANE>right</LANE>
             </IF>
             <THEN>
@@ -328,6 +404,20 @@
                 <SPEED_A>medium</SPEED_A>
                 <DISTANCE_AB>near</DISTANCE_AB>
                 <DISTANCE_AC>far</DISTANCE_AC>
+                <DISTANCE_END>far</DISTANCE_END>
+                <LANE>right</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>high</ACCELERATION>
+                <LANE>left</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <SPEED_A>medium</SPEED_A>
+                <DISTANCE_AB>near</DISTANCE_AB>
+                <DISTANCE_AC>far</DISTANCE_AC>
+                <DISTANCE_END>normal</DISTANCE_END>
                 <LANE>right</LANE>
             </IF>
             <THEN>
@@ -388,6 +478,20 @@
                 <SPEED_A>medium</SPEED_A>
                 <DISTANCE_AB>near</DISTANCE_AB>
                 <DISTANCE_AC>behind</DISTANCE_AC>
+                <DISTANCE_END>far</DISTANCE_END>
+                <LANE>right</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>high</ACCELERATION>
+                <LANE>left</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <SPEED_A>medium</SPEED_A>
+                <DISTANCE_AB>near</DISTANCE_AB>
+                <DISTANCE_AC>behind</DISTANCE_AC>
+                <DISTANCE_END>normal</DISTANCE_END>
                 <LANE>right</LANE>
             </IF>
             <THEN>
@@ -411,6 +515,20 @@
                 <SPEED_A>fast</SPEED_A>
                 <DISTANCE_AB>dangerously_close</DISTANCE_AB>
                 <DISTANCE_AC>far</DISTANCE_AC>
+                <DISTANCE_END>far</DISTANCE_END>
+                <LANE>right</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>zero</ACCELERATION>
+                <LANE>left</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <SPEED_A>fast</SPEED_A>
+                <DISTANCE_AB>dangerously_close</DISTANCE_AB>
+                <DISTANCE_AC>far</DISTANCE_AC>
+                <DISTANCE_END>normal</DISTANCE_END>
                 <LANE>right</LANE>
             </IF>
             <THEN>
@@ -495,6 +613,22 @@
                 <SPEED_C>medium</SPEED_C>
                 <DISTANCE_AB>dangerously_close</DISTANCE_AB>
                 <DISTANCE_AC>normal</DISTANCE_AC>
+                <DISTANCE_END>far</DISTANCE_END>
+                <LANE>right</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>zero</ACCELERATION>
+                <LANE>left</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <SPEED_A>fast</SPEED_A>
+                <SPEED_B>slow</SPEED_B>
+                <SPEED_C>medium</SPEED_C>
+                <DISTANCE_AB>dangerously_close</DISTANCE_AB>
+                <DISTANCE_AC>normal</DISTANCE_AC>
+                <DISTANCE_END>normal</DISTANCE_END>
                 <LANE>right</LANE>
             </IF>
             <THEN>
@@ -509,6 +643,22 @@
                 <SPEED_C>slow</SPEED_C>
                 <DISTANCE_AB>dangerously_close</DISTANCE_AB>
                 <DISTANCE_AC>normal</DISTANCE_AC>
+                <DISTANCE_END>far</DISTANCE_END>
+                <LANE>right</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>zero</ACCELERATION>
+                <LANE>left</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <SPEED_A>fast</SPEED_A>
+                <SPEED_B>fast</SPEED_B>
+                <SPEED_C>slow</SPEED_C>
+                <DISTANCE_AB>dangerously_close</DISTANCE_AB>
+                <DISTANCE_AC>normal</DISTANCE_AC>
+                <DISTANCE_END>normal</DISTANCE_END>
                 <LANE>right</LANE>
             </IF>
             <THEN>
@@ -536,6 +686,22 @@
                 <SPEED_B>slow</SPEED_B>
                 <SPEED_C>slow</SPEED_C>
                 <DISTANCE_AB>dangerously_close</DISTANCE_AB>
+                <DISTANCE_END>far</DISTANCE_END>
+                <DISTANCE_AC>normal</DISTANCE_AC>
+                <LANE>right</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>zero</ACCELERATION>
+                <LANE>left</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <SPEED_A>fast</SPEED_A>
+                <SPEED_B>slow</SPEED_B>
+                <SPEED_C>slow</SPEED_C>
+                <DISTANCE_AB>dangerously_close</DISTANCE_AB>
+                <DISTANCE_END>normal</DISTANCE_END>
                 <DISTANCE_AC>normal</DISTANCE_AC>
                 <LANE>right</LANE>
             </IF>
@@ -612,6 +778,20 @@
                 <SPEED_A>fast</SPEED_A>
                 <DISTANCE_AB>dangerously_close</DISTANCE_AB>
                 <DISTANCE_AC>behind</DISTANCE_AC>
+                <DISTANCE_END>far</DISTANCE_END>
+                <LANE>right</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>zero</ACCELERATION>
+                <LANE>left</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <SPEED_A>fast</SPEED_A>
+                <DISTANCE_AB>dangerously_close</DISTANCE_AB>
+                <DISTANCE_AC>behind</DISTANCE_AC>
+                <DISTANCE_END>normal</DISTANCE_END>
                 <LANE>right</LANE>
             </IF>
             <THEN>
@@ -624,6 +804,20 @@
                 <SPEED_A>medium</SPEED_A>
                 <DISTANCE_AB>dangerously_close</DISTANCE_AB>
                 <DISTANCE_AC>far</DISTANCE_AC>
+                <DISTANCE_END>far</DISTANCE_END>
+                <LANE>right</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>zero</ACCELERATION>
+                <LANE>left</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <SPEED_A>medium</SPEED_A>
+                <DISTANCE_AB>dangerously_close</DISTANCE_AB>
+                <DISTANCE_AC>far</DISTANCE_AC>
+                <DISTANCE_END>normal</DISTANCE_END>
                 <LANE>right</LANE>
             </IF>
             <THEN>
@@ -684,6 +878,20 @@
                 <SPEED_A>medium</SPEED_A>
                 <DISTANCE_AB>dangerously_close</DISTANCE_AB>
                 <DISTANCE_AC>behind</DISTANCE_AC>
+                <DISTANCE_END>far</DISTANCE_END>
+                <LANE>right</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>zero</ACCELERATION>
+                <LANE>left</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <SPEED_A>medium</SPEED_A>
+                <DISTANCE_AB>dangerously_close</DISTANCE_AB>
+                <DISTANCE_AC>behind</DISTANCE_AC>
+                <DISTANCE_END>normal</DISTANCE_END>
                 <LANE>right</LANE>
             </IF>
             <THEN>
@@ -696,6 +904,20 @@
                 <SPEED_A>slow</SPEED_A>
                 <DISTANCE_AB>dangerously_close</DISTANCE_AB>
                 <DISTANCE_AC>far</DISTANCE_AC>
+                <DISTANCE_END>far</DISTANCE_END>
+                <LANE>right</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>zero</ACCELERATION>
+                <LANE>left</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <SPEED_A>slow</SPEED_A>
+                <DISTANCE_AB>dangerously_close</DISTANCE_AB>
+                <DISTANCE_AC>far</DISTANCE_AC>
+                <DISTANCE_END>normal</DISTANCE_END>
                 <LANE>right</LANE>
             </IF>
             <THEN>
@@ -756,6 +978,20 @@
                 <SPEED_A>slow</SPEED_A>
                 <DISTANCE_AB>dangerously_close</DISTANCE_AB>
                 <DISTANCE_AC>behind</DISTANCE_AC>
+                <DISTANCE_END>far</DISTANCE_END>
+                <LANE>right</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>zero</ACCELERATION>
+                <LANE>left</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <SPEED_A>slow</SPEED_A>
+                <DISTANCE_AB>dangerously_close</DISTANCE_AB>
+                <DISTANCE_AC>behind</DISTANCE_AC>
+                <DISTANCE_END>normal</DISTANCE_END>
                 <LANE>right</LANE>
             </IF>
             <THEN>
@@ -806,6 +1042,29 @@
         <RULE>
             <IF>
                 <DISTANCE_AB>dangerously_close</DISTANCE_AB>
+                <DISTANCE_END>near</DISTANCE_END>
+                <LANE>left</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>high_break</ACCELERATION>
+                <LANE>right</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <DISTANCE_AB>dangerously_close</DISTANCE_AB>
+                <DISTANCE_END>far</DISTANCE_END>
+                <LANE>left</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>high</ACCELERATION>
+                <LANE>left</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <DISTANCE_AB>dangerously_close</DISTANCE_AB>
+                <DISTANCE_END>normal</DISTANCE_END>
                 <LANE>left</LANE>
             </IF>
             <THEN>
@@ -826,6 +1085,29 @@
         <RULE>
             <IF>
                 <DISTANCE_AB>near</DISTANCE_AB>
+                <DISTANCE_END>near</DISTANCE_END>
+                <LANE>left</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>high_break</ACCELERATION>
+                <LANE>right</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <DISTANCE_AB>near</DISTANCE_AB>
+                <DISTANCE_END>far</DISTANCE_END>
+                <LANE>left</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>high</ACCELERATION>
+                <LANE>left</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <DISTANCE_AB>near</DISTANCE_AB>
+                <DISTANCE_END>normal</DISTANCE_END>
                 <LANE>left</LANE>
             </IF>
             <THEN>
@@ -840,6 +1122,86 @@
             </IF>
             <THEN>
                 <ACCELERATION>high_break</ACCELERATION>
+                <LANE>right</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <DISTANCE_AB>dangerously_close</DISTANCE_AB>
+                <DISTANCE_END>near</DISTANCE_END>
+                <LANE>left</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>high_break</ACCELERATION>
+                <LANE>left</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <DISTANCE_AB>near</DISTANCE_AB>
+                <DISTANCE_END>near</DISTANCE_END>
+                <LANE>left</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>high_break</ACCELERATION>
+                <LANE>right</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <DISTANCE_END>near</DISTANCE_END>
+                <DISTANCE_AB>near</DISTANCE_AB>
+                <LANE>right</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>high_break</ACCELERATION>
+                <LANE>right</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <DISTANCE_END>near</DISTANCE_END>
+                <DISTANCE_AB>dangerously_close</DISTANCE_AB>
+                <LANE>right</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>high_break</ACCELERATION>
+                <LANE>right</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <DISTANCE_END>near</DISTANCE_END>
+                <DISTANCE_AB>behind</DISTANCE_AB>
+                <LANE>right</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>high</ACCELERATION>
+                <LANE>right</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <DISTANCE_END>normal</DISTANCE_END>
+                <DISTANCE_AB>normal</DISTANCE_AB>
+                <SPEED_B>slow</SPEED_B>
+                <SPEED_A>fast</SPEED_A>
+                <LANE>right</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>high_break</ACCELERATION>
+                <LANE>right</LANE>
+            </THEN>
+        </RULE>
+        <RULE>
+            <IF>
+                <DISTANCE_AB>normal</DISTANCE_AB>
+                <SPEED_B>slow</SPEED_B>
+                <SPEED_A>fast</SPEED_A>
+                <LANE>right</LANE>
+            </IF>
+            <THEN>
+                <ACCELERATION>zero</ACCELERATION>
                 <LANE>right</LANE>
             </THEN>
         </RULE>

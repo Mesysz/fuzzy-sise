@@ -47,6 +47,7 @@ void FuzzyDriver::fuzzyficate(double speedA, double speedB, double speedC, doubl
     tMap["SPEED_C"] = t3;
     tMap["DISTANCE_AB"] = t4;
     tMap["DISTANCE_AC"] = t5;
+    tMap["DISTANCE_END"] = t6;
 
 //    DEBUGOWANIE BARDZO XD
 //

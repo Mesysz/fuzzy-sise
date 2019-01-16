@@ -34,15 +34,15 @@
             <NAME>normal</NAME>
             <A>90</A>
             <M>180</M>
-            <N>600</N>
-            <B>900</B>
+            <N>500</N>
+            <B>700</B>
         </PARAM>
         <PARAM>
             <NAME>near</NAME>
             <A>3</A>
             <M>5</M>
             <N>80</N>
-            <B>100</B>
+            <B>120</B>
         </PARAM>
         <PARAM>
             <NAME>dangerously_close</NAME>
@@ -60,8 +60,8 @@
         </PARAM>
         <PARAM>
             <NAME>behind</NAME>
-            <A>-2000</A>
-            <M>-2000</M>    <!--TUTAJ TROCHE INNE WARTOSCI-->
+            <A>-5000</A>
+            <M>-5000</M>    <!--TUTAJ TROCHE INNE WARTOSCI-->
             <N>-500</N>
             <B>-40</B>
         </PARAM>

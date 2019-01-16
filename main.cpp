@@ -13,7 +13,7 @@ int main()
     std::cout<<"Authors: Antoni Messyasz, Barlomiej Szewczyk"<<std::endl;
     std::cout << "Hello Road!" << std::endl;
     std::uniform_real_distribution<double> random_speed(6.0, 25.0);
-    std::uniform_real_distribution<double> random_distance(10.0, 2000.0);
+    std::uniform_real_distribution<double> random_distance(50.0, 2000.0);
     std::default_random_engine re(std::chrono::system_clock::now().time_since_epoch().count());
 //#ifdef NO_GRAPHICS
     for (int i = 0; i < 100; ++i) {
