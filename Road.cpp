@@ -84,6 +84,8 @@ void Road::simulate() {
         if (distanceAB < 4 && distanceAB > -4 && lane == right) {
             notEnd = false;
             crashed = "AB";
+            if (distanceAB > 0) crashed += " wjechal A";
+            if (distanceAB < 0) crashed += " wjechal B";
             break;
         }
 //        std::cout << "A " << speedA << " B " << speedB << " C " << speedC << " distance AB " << distanceAB

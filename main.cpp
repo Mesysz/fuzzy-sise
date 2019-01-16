@@ -18,6 +18,7 @@ int main()
 //#ifdef NO_GRAPHICS
     for (int i = 0; i < 1000; ++i) {
 //#endif
+        std::cout << i << " ";
         //std::random_device r("mt19937");
         double speedA = random_speed(re);
         double speedB = random_speed(re);

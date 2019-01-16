@@ -27,7 +27,7 @@
             <NAME>far</NAME>
             <A>600</A>
             <M>900</M>
-            <N>1400</N>
+            <N>2000</N>
             <B>2000</B>
         </PARAM>
         <PARAM>
@@ -101,24 +101,24 @@
             <M>0</M>
             <B>0.1</B>
         </TRIANGLE>
-        <PARAM>
+        <TRIANGLE>
             <NAME>small_break</NAME>
             <A>0.0</A>
             <M>-1.7</M>
             <B>-3.5</B>
-        </PARAM>
+        </TRIANGLE>
         <TRIANGLE>
             <NAME>medium_break</NAME>
             <A>-2.5</A>
             <M>-4.5</M>
             <B>-6.5</B>
         </TRIANGLE>
-        <PARAM>
+        <TRIANGLE>
             <NAME>high_break</NAME>
             <A>-5.5</A>
             <N>-9.0</N>
             <B>-9.0</B>
-        </PARAM>
+        </TRIANGLE>
     </ACCELERATION>
 </PARAMETERS>
 
