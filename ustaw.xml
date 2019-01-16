@@ -2,47 +2,47 @@
     <SPEED>
         <PARAM>
             <NAME>fast</NAME>
-            <A>18.0</A>
+            <A>15.0</A>
             <M>20.0</M>
             <N>25.0</N>
             <B>25.0</B>
         </PARAM>
         <PARAM>
             <NAME>medium</NAME>
-            <A>9.0</A>
-            <M>11.0</M>
-            <N>18.0</N>
-            <B>20.0</B>
+            <A>7.0</A>
+            <M>9.0</M>
+            <N>13.0</N>
+            <B>17.0</B>
         </PARAM>
         <PARAM>
             <NAME>slow</NAME>
             <A>0.0</A>
             <M>0.0</M>
-            <N>9.0</N>
-            <B>11.0</B>
+            <N>7.0</N>
+            <B>9.0</B>
         </PARAM>
     </SPEED>
     <DISTANCE>
         <PARAM>
             <NAME>far</NAME>
-            <A>900</A>
-            <M>1100</M>
+            <A>600</A>
+            <M>900</M>
             <N>1400</N>
             <B>2000</B>
         </PARAM>
         <PARAM>
             <NAME>normal</NAME>
-            <A>70</A>
-            <M>150</M>
-            <N>900</N>
-            <B>1100</B>
+            <A>90</A>
+            <M>180</M>
+            <N>600</N>
+            <B>900</B>
         </PARAM>
         <PARAM>
             <NAME>near</NAME>
             <A>3</A>
             <M>5</M>
-            <N>70</N>
-            <B>150</B>
+            <N>80</N>
+            <B>100</B>
         </PARAM>
         <PARAM>
             <NAME>dangerously_close</NAME>
@@ -53,8 +53,8 @@
         </PARAM>
         <PARAM>
             <NAME>close_behind</NAME>
-            <A>-60</A>
-            <M>-50</M>
+            <A>-40</A>
+            <M>-30</M>
             <N>-20</N>
             <B>0</B>
         </PARAM>
@@ -63,7 +63,7 @@
             <A>-2000</A>
             <M>-2000</M>    <!--TUTAJ TROCHE INNE WARTOSCI-->
             <N>-500</N>
-            <B>-50</B>
+            <B>-40</B>
         </PARAM>
     </DISTANCE>
     <LANE>
