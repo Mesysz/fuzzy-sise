@@ -1,31 +1,35 @@
 <PARAMETERS>
     <SPEED>
-        <TRIANGLE>
+        <PARAM>
             <NAME>fast</NAME>
             <A>15.0</A>
             <M>20.0</M>
+            <N>25.0</N>
             <B>25.0</B>
-        </TRIANGLE>
-        <TRIANGLE>
+        </PARAM>
+        <PARAM>
             <NAME>medium</NAME>
             <A>7.0</A>
             <M>9.0</M>
+            <N>13.0</N>
             <B>17.0</B>
-        </TRIANGLE>
-        <TRIANGLE>
+        </PARAM>
+        <PARAM>
             <NAME>slow</NAME>
             <A>0.0</A>
+            <M>0.0</M>
             <N>7.0</N>
             <B>9.0</B>
-        </TRIANGLE>
+        </PARAM>
     </SPEED>
     <DISTANCE>
-        <TRIANGLE>
+        <PARAM>
             <NAME>far</NAME>
             <A>600</A>
             <M>900</M>
+            <N>2000</N>
             <B>2000</B>
-        </TRIANGLE>
+        </PARAM>
         <PARAM>
             <NAME>normal</NAME>
             <A>90</A>
@@ -57,7 +61,7 @@
         <PARAM>
             <NAME>behind</NAME>
             <A>-5000</A>
-            <M>-5000</M>    <!--TUTAJ TROCHE INNE WARTOSCI-->
+            <M>-5000</M> <!--TUTAJ TROCHE INNE WARTOSCI-->
             <N>-500</N>
             <B>-40</B>
         </PARAM>
@@ -116,117 +120,4 @@
             <B>-9.0</B>
         </TRIANGLE>
     </ACCELERATION>
-</PARAMETERS>
-
-<PARAMETERS>
-<SPEED>
-    <TRIANGLE>
-        <NAME>fast</NAME>
-        <A>15.0</A>
-        <M>20.0</M>
-        <B>25.0</B>
-    </TRIANGLE>
-    <TRIANGLE>
-        <NAME>medium</NAME>
-        <A>7.0</A>
-        <M>12.0</M>
-        <B>17.0</B>
-    </TRIANGLE>
-    <TRIANGLE>
-        <NAME>slow</NAME>
-        <A>0.0</A>
-        <M>4.5</M>
-        <B>9.0</B>
-    </TRIANGLE>
-</SPEED>
-<DISTANCE>
-    <TRIANGLE>
-        <NAME>far</NAME>
-        <A>600</A>
-        <M>1300</M>
-        <B>2000</B>
-    </TRIANGLE>
-    <TRIANGLE>
-        <NAME>normal</NAME>
-        <A>150</A>
-        <M>375</M>
-        <B>700</B>
-    </TRIANGLE>
-    <TRIANGLE>
-        <NAME>near</NAME>
-        <A>6</A>
-        <M>78</M>
-        <B>150</B>
-    </TRIANGLE>
-    <TRIANGLE>
-        <NAME>dangerously_close</NAME>
-        <A>0</A>
-        <M>6</M>
-        <B>12</B>
-    </TRIANGLE>
-    <TRIANGLE>
-        <NAME>close_behind</NAME>
-        <A>-40</A>
-        <M>-20</M>
-        <B>0</B>
-    </TRIANGLE>
-    <TRIANGLE>
-        <NAME>behind</NAME>
-        <A>-5000</A>
-        <M>-2500</M>
-        <B>-40</B>
-    </TRIANGLE>
-</DISTANCE>
-<LANE>
-    <TRIANGLE>
-        <NAME>left</NAME>
-        <A>0</A>
-        <M>0</M>
-        <B>0</B>
-    </TRIANGLE>
-    <TRIANGLE>
-        <NAME>right</NAME>
-        <A>1</A>
-        <M>1</M>
-        <B>1</B>
-    </TRIANGLE>
-</LANE>
-<ACCELERATION>
-    <TRIANGLE>
-        <NAME>high</NAME>
-        <A>0.3</A>
-        <M>0.8</M>
-        <B>1.3</B>
-    </TRIANGLE>
-    <TRIANGLE>
-        <NAME>small</NAME>
-        <A>0.0</A>
-        <M>0.5</M>
-        <B>1.0</B>
-    </TRIANGLE>
-    <TRIANGLE>
-        <NAME>zero</NAME>
-        <A>-0.1</A>
-        <M>0</M>
-        <B>0.1</B>
-    </TRIANGLE>
-    <TRIANGLE>
-        <NAME>small_break</NAME>
-        <A>0.0</A>
-        <M>-1.7</M>
-        <B>-3.5</B>
-    </TRIANGLE>
-    <TRIANGLE>
-        <NAME>medium_break</NAME>
-        <A>-2.5</A>
-        <M>-4.5</M>
-        <B>-6.5</B>
-    </TRIANGLE>
-    <TRIANGLE>
-        <NAME>high_break</NAME>
-        <A>-5.5</A>
-        <N>-7.0</N>
-        <B>-9.0</B>
-    </TRIANGLE>
-</ACCELERATION>
 </PARAMETERS>

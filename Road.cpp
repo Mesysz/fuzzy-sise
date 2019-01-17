@@ -12,7 +12,7 @@
 
 void Road::simulate() {
     bool notEnd = true;
-    std::string source = "../ustaw.xml";
+    std::string source = "../trapez.xml";
     fuzzyDriver.readRegs(source.c_str());
     double maxSpeed = fuzzyDriver.getSpeedVector().begin()->B;
 #ifndef NO_GRAPHICS
